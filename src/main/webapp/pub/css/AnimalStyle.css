@@ -1,0 +1,14 @@
+/*Not married to this, a lot is gonna change*/
+#herdList{
+    width: 60%;
+    margin: auto;
+}
+
+#herdList tr{
+    padding: 10px;
+    margin: 10px;
+}
+
+#herdList td{
+text-align: center;
+}
