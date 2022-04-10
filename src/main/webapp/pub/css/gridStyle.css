@@ -1,0 +1,89 @@
+/*Main Grid Layout for website*/
+.mainGridContainer{
+    display: grid;
+    grid-template-columns: 5fr;
+    grid-template-rows: 1fr 5fr 1fr;
+    grid-template-areas:
+            "headerContent"
+            "mainContentContainer"
+            "footerContent";
+    /*gap: 0.5em;*/
+}
+
+.headerContent{
+    grid-area: headerContent;
+    /*height: 10vh;*/
+    /*background-color: #00850b;*/
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "siteLogo headerSearch headerAccount";
+    display: flex;
+    justify-content: space-between;
+    /*TODO: Ask Raheem why not working*/
+    align-items: center;
+    border-bottom: 1px solid white;
+    margin-bottom: 1vh;
+}
+
+.mainContentContainer{
+    grid-area: mainContentContainer;
+    height: 70vh;
+    /*background-color: #b70202;*/
+    grid-template-columns: 1.2fr 3fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "navContainer mainContent sideContent";
+    display: flex;
+    justify-content: space-between;
+}
+
+.footerContent{
+    grid-area: footerContent;
+    height: 10vh;
+    background-color: aqua;
+}
+/*-----------------------------*/
+/*header Grid Layout ----------*/
+#siteLogo{
+    grid-area: siteLogo;
+    /*background-color: antiquewhite;*/
+    height: 100%;
+    width: 20vw;
+}
+
+#headerSearch{
+    grid-area: headerSearch;
+    /*background-color: cadetblue;*/
+    height: 100%;
+    width: 30vw;
+    display: flex;
+    text-align: center;
+    justify-items: center;
+    align-items: center;
+}
+
+#headerAccount{
+    grid-area: headerAccount;
+    background-color: chocolate;
+    height: 100%;
+    width: 20vw;
+}
+/*-----------------------------*/
+/*MainContentContainer Grid Layout ----------*/
+#navContainer{
+    grid-area: navContainer;
+    width: 20vw;
+}
+
+#mainContent{
+    grid-area: mainContent;
+    background-color: aquamarine;
+    width: 50vw;
+
+}
+
+#sideContent{
+    grid-area: sideContent;
+    width: 20vw;
+    background-color: aliceblue;
+
+}

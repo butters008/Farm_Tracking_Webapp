@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -26,9 +27,12 @@ public class Animal {
     @Column(name = "animal_type")
     private String animalType;
 
-    @Column(name = "herd_status_id")
-    private Integer herdStatusId;
+    @Column(name = "herd_status")
+    private String herdStatus;
 
-    @Column(name = "general_info_id")
-    private Integer generalInfoId;
+    @Column(name = "date_of_birth")
+    private Date dateOfBirth;
+
+    @Column(name = "date_of_death")
+    private Date dateOfDeath;
 }
