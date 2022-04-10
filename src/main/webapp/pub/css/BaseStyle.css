@@ -8,105 +8,62 @@
     font-family: 'Roboto', sans-serif;
 }
 
-/*Header and Nav*/
-header{
-    text-align: center;
-    height: 150px;
-    display: flex;
-    /*flex-direction: row;*/
+body{
     background-color: var(--baseColor);
-    border-bottom: 1px;
-    box-shadow: 5px 10px red;
-    /*background: linear-gradient(*/
-    /*var(--secondaryColor) 0%,*/
-    /*var(--baseColor)15%*/
-    /*);*/
+}
 
-
-    justify-content: space-between;
+/*Header and Nav*/
+#siteLogo{
     align-items: center;
 }
 
-.headerBox{
-    /*height: 100px;*/
-    min-width: 100px;
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-right: 10px;
-    margin-left: 10px;
-    /*background-color: var(--overlayColor);*/
-    text-align: center;
-
-
-
+#siteLogo img{
+    width: 30%;
 }
 
-header span{
+#siteLogo span{
     font-size: 80px;
-    height: 100px;
     text-shadow: 3px 5px 6px #a46c02;
-    /*margin-right: 250px;*/
-    /*float: left;*/
 }
 
-header img {
-
-    /*height: 20%;*/
-    /*width: 5%;*/
+#headerSearch input{
     width: 100%;
-    width: 100px;
-    /*width: fit-content;*/
-    float: left;
+    height: 5vh;
+    border-radius: 5px;
+    font-size: large;
 }
 
-#searchAnimalId{
-    flex: 2;
-
-}
-
-#searchAnimalId input{
-
-}
-
-.navContainer {
+.navULContainer{
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: var(--secondaryColor);
-    border-radius: 5px;
+    /*background-color: var(--secondaryColor);*/
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    /*    border-radius: 5px;*/
 }
 
 .navButton{
-    float: left;
+    /*float: right;*/
     transition: width 4s;
-
+    border-radius: 5px;
 }
 
 .navButton a {
     display: block;
     color: var(--whiteText);
     text-align: center;
-    min-width: 150px;
+    width: 100%;
+    height: 4vh;
     padding: 14px 16px;
     text-decoration: none;
-    border-radius: 5px;
+
 }
 
 .navButton a:hover{
     background-color: var(--actionColor);
-    width: 70px;
-    /*tra*/
-}
+    /*width: 70px;*/
 
-.account{
-    float: right;
-}
-/*Header and Nav*/
-
-body{
-    color: var(--whiteText);
-    /*width: 60%;*/
-    margin: auto;
-    background-color: var(--secondaryColor);
 }
