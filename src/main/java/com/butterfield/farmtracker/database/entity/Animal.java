@@ -3,9 +3,11 @@ package com.butterfield.farmtracker.database.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -35,4 +37,16 @@ public class Animal {
 
     @Column(name = "date_of_death")
     private Date dateOfDeath;
+
+    @OneToMany(mappedBy = "cow", fetch = FetchType.LAZY)
+    @ToString.Exclude
+    private Set<ParentCalves> parentCow;
+
+    @OneToMany(mappedBy = "bull", fetch = FetchType.LAZY)
+    @ToString.Exclude
+    private Set<ParentCalves> parentBull;
+
+    @OneToMany(mappedBy = "animal", fetch = FetchType.LAZY)
+    @ToString.Exclude
+    private Set<UserAnimal> userAnimals;
 }

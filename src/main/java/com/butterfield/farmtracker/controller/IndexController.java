@@ -4,6 +4,8 @@ import com.butterfield.farmtracker.database.dao.UserDAO;
 import com.butterfield.farmtracker.database.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,14 +23,13 @@ public class IndexController {
     public ModelAndView index() throws Exception {
         ModelAndView response = new ModelAndView();
 
-        List<User> users = userDAO.findByFirstName("Keith");
-
-        for(User user : users){
-            log.info(user.toString());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        log.info(" " + authentication.isAuthenticated());
+        if (authentication.isAuthenticated()) {
+            String currentPrincipalName = authentication.getName();
+            User user = userDAO.findByEmail(currentPrincipalName);
+            response.addObject("user", user);
         }
-        log.info(users.toString());
-        response.setViewName("index");
-        response.addObject("userList", users);
 
         return response;
 

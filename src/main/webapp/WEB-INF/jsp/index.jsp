@@ -4,6 +4,7 @@
 <section id="mainContent">
     <h1>Hello</h1>
     <ul>
+        ${user}
         <%--    <c:forEach items="${userList}" var="user">--%>
         <%--        <li>${user.firstName}</li>--%>
         <%--    </c:forEach>--%>
