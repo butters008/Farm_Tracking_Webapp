@@ -26,7 +26,6 @@ public class HerdController {
     public ModelAndView listAllCows() throws Exception {
         ModelAndView response = new ModelAndView();
 
-
         List<Animal> animals = herdDAO.findByAnimalType("cow");
         response.addObject("cows", animals);
 
@@ -54,6 +53,15 @@ public class HerdController {
         response.setViewName("herd/addAnimal");
         return response;
     }
+
+    @RequestMapping(value = "/herd/animal", method = RequestMethod.GET)
+    public ModelAndView setupAnimalPage(@Valid HerdFormBean form) throws Exception {
+        ModelAndView response = new ModelAndView();
+
+        response.setViewName("herd/addAnimal");
+        return response;
+    }
+
 
     @RequestMapping(value = "/herd/submitAnimal", method = RequestMethod.GET)
     public ModelAndView submitAnimal(@Valid HerdFormBean form) throws Exception {
