@@ -1,10 +1,18 @@
 package com.butterfield.farmtracker.controller;
 
 import com.butterfield.farmtracker.database.dao.HerdDAO;
+import com.butterfield.farmtracker.database.dao.UserAnimalDAO;
+import com.butterfield.farmtracker.database.dao.UserDAO;
 import com.butterfield.farmtracker.database.entity.Animal;
+import com.butterfield.farmtracker.database.entity.User;
+import com.butterfield.farmtracker.database.entity.UserAnimal;
 import com.butterfield.farmtracker.formBean.HerdFormBean;
+import com.butterfield.farmtracker.security.SecurityService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,10 +24,20 @@ import java.util.List;
 
 @Slf4j
 @Controller
+@PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
 public class HerdController {
 
     @Autowired
     private HerdDAO herdDAO;
+
+    @Autowired
+    private UserDAO userDAO;
+
+    @Autowired
+    private UserAnimalDAO userAnimalDAO;
+
+    @Autowired
+    private SecurityService securityService = new SecurityService();
 
     //For right now I am going to hard code in list of cows
     @RequestMapping(value = "/herd/list", method = RequestMethod.GET)
@@ -67,25 +85,55 @@ public class HerdController {
     public ModelAndView submitAnimal(@Valid HerdFormBean form) throws Exception {
         ModelAndView response = new ModelAndView();
 
-        //TODO: Will add error handling in later
-        log.info(form.toString());
+        User userLoggedIn = securityService.getLoggedInUser();
 
-        //Putting the animal in the DB
-        Animal animal = new Animal();
-        animal.setAnimalId1(form.getAnimalId1());
-        animal.setAnimalId2(form.getAnimalId2());
-        animal.setAnimalType(form.getAnimalType());
-        animal.setHerdStatus(form.getHerdStatus());
+        if (userLoggedIn == null) {
+            response.setViewName("redirect:/index");
+        }
+        else{
+            //Creating the animal object
+            // TODO: Finish inputing all animal data
+            Animal animal = new Animal();
+            animal.setAnimalId1(form.getAnimalId1());
+            animal.setAnimalId2(form.getAnimalId2());
+            animal.setAnimalType(form.getAnimalType());
+            animal.setHerdStatus(form.getHerdStatus());
+            animal.setBoughtFrom(form.getBoughtFrom()); //TODO: This is not working
+
+            //Saving the animal to the DB
+            herdDAO.save(animal);
+
+            //Creating a new userAnimal and submitting this to DB
+            UserAnimal userAnimal = new UserAnimal();
+            userAnimal.setUserId(userLoggedIn.getId());
+            userAnimal.setAnimalId(animal.getId());
+//
+            log.info("User Information: " + userLoggedIn);
+            log.info("Trying to get user's ID: " + userLoggedIn.getId());
+            log.info("Animal Information" + animal);
+            log.info("Trying to get user's ID: " + animal.getId());
+            log.info("Grabbing animal Id from userAnimal: " + userAnimal.getAnimalId());
+            log.info("Grabbing user Id from userAnimal: " + userAnimal.getUserId());
+
+
+//            log.info("Animal Information" + animal);
+//            UserAnimal userAnimal = new UserAnimal(userLoggedIn.getId(), animal.getId());
+            log.info("Grabbing userAnimal: " + userAnimal);
+            userAnimal.setAnimal(animal);
+            userAnimal.setUser(userLoggedIn);
+
+            userAnimalDAO.save(userAnimal);
+
+            //Once completed, than return to view
+            response.setViewName("herd/addAnimal");
+
+        }
+
 //        animal.setDateOfBirth(form.getDateOfBirth());
 //        animal.setDateOfDeath(form.getDateOfDeath());
 
-        log.info(animal.toString());
-
-        herdDAO.save(animal);
-
-        //TODO: Have redirect or something maybe later
-        response.setViewName("herd/addAnimal");
         return response;
+
     }
 
 

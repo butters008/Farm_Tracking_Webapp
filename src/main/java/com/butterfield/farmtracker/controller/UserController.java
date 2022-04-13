@@ -5,6 +5,9 @@ import com.butterfield.farmtracker.database.entity.User;
 import com.butterfield.farmtracker.formBean.RegisterFormBean;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -18,6 +21,7 @@ import java.util.List;
 
 @Slf4j
 @Controller
+@PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
 public class UserController {
 
     @Autowired
@@ -29,6 +33,25 @@ public class UserController {
         ModelAndView response = new ModelAndView();
         response.setViewName("user/register");
 
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        log.info(" " + authentication.isAuthenticated());
+//
+//        String currentPrincipalName = authentication.getName();
+//        User userLoggedIn = userDAO.findByEmail(currentPrincipalName);
+//
+//
+//        if (userLoggedIn == null) {
+//            response.setViewName("redirect:/index");
+//        }
+//        else{
+//
+//        }
+
+//        if (authentication.isAuthenticated()) {
+//            String currentPrincipalName = authentication.getName();
+//            User user = userDAO.findByEmail(currentPrincipalName);
+//            response.addObject("user", user);
+//        }
 
         return response;
     }
