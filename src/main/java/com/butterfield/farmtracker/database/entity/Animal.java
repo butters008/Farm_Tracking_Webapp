@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 
@@ -33,10 +34,16 @@ public class Animal {
     private String herdStatus;
 
     @Column(name = "date_of_birth")
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
 
     @Column(name = "date_of_death")
-    private Date dateOfDeath;
+    private LocalDate dateOfDeath;
+
+    @Column(name = "bought_from")
+    private String boughtFrom;
+
+    @Column(name = "bought_date")
+    private LocalDate boughtDate;
 
     @OneToMany(mappedBy = "cow", fetch = FetchType.LAZY)
     @ToString.Exclude

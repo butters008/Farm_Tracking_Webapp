@@ -1,11 +1,13 @@
 :root{
     --baseColor: #1d1d1d;
     --secondaryColor: #333;
-    --attentionColor: #b70202;
-    --overlayColor: rgba(255, 0, 0, 0.2);
+    --attentionColor: #be680b;
+    /*--overlayColor: rgba(255, 0, 0, 0.2);    */
+    --overlayColor: rgba(164, 108, 2, 0.05);
     --actionColor: #00850b;
-    --whiteText: white;
+    --whiteText: rgb(255, 255, 255);
     font-family: 'Roboto', sans-serif;
+    color: var(--whiteText);
 }
 
 body{
@@ -63,7 +65,17 @@ body{
 }
 
 .navButton a:hover{
-    background-color: var(--actionColor);
+    /*background-color: var(--overlayColor);*/
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0%, var(--overlayColor)100%);
+    border-bottom: 1px solid var(--whiteText);
+    border-radius: 10px;
     /*width: 70px;*/
 
+}
+
+.loginPageStyle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }

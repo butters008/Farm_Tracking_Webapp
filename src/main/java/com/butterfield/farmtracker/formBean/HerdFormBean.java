@@ -5,6 +5,8 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.web.servlet.tags.form.CheckboxTag;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
@@ -17,8 +19,10 @@ public class HerdFormBean {
     private String animalId2;
     private String animalType;
     private String herdStatus;
-    private Date dateOfBirth;
-    private Date dateOfDeath;
+    private LocalDate dateOfBirth;
+    private LocalDate dateOfDeath;
+    private String boughtFrom;
+    private LocalDate boughtDate;
 
 //    private CheckboxTag checkbox;
 
