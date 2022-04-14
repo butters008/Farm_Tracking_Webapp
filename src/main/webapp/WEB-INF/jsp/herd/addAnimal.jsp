@@ -55,7 +55,7 @@
             Dead<input type="radio" name="herdStatus" value="Dead">
         </div><br>
         <label for="broughtFrom">Bought From</label>
-        <input type="text" name="broughtFrom" id="broughtFrom"><br>
+        <input type="text" name="boughtFrom" id="broughtFrom"><br>
     </div>
 
     <div class="aDates">

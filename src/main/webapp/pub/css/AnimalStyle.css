@@ -116,3 +116,30 @@
 .aSubmit button:hover{
     background-color: var(--actionColor);
 }
+
+#listTitle{
+    grid-area: listTitle;
+    display: flex;
+    justify-content: center;
+}
+#listTable{
+    grid-area: listTable;
+    display: flex;
+    justify-content: center;
+}
+#listFooter{
+    grid-area: listFooter;
+}
+#listTable #herdList {
+    width: 40vw;
+}
+
+#listTable #herdList tr{
+    height: 2vh;
+    align-content: center;
+    background-color: var();
+}
+#listTable #herdList td{
+    padding: 5px;
+    text-align: center;
+}

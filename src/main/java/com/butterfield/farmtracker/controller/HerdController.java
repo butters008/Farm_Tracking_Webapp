@@ -128,8 +128,8 @@ public class HerdController {
 //            log.info("Grabbing user Id from userAnimal: " + userAnimal.getUserId());
 
             log.info("Grabbing userAnimal: " + userAnimal);
-            userAnimal.setAnimal(animal);
-            userAnimal.setUser(userLoggedIn);
+//            userAnimal.setAnimal(animal);
+//            userAnimal.setUser(userLoggedIn);
 
             userAnimalDAO.save(userAnimal);
 
