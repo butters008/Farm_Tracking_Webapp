@@ -69,7 +69,12 @@
     text-align: center;
 }
 
-.aStatus #broughtFrom{
+.aStatus #boughtFrom{
+    width: 50%;
+    margin: auto;
+}
+
+.aStatus #breed{
     width: 50%;
     margin: auto;
 }
@@ -101,9 +106,11 @@
     /*background-color: blueviolet;*/
     display: flex;
     /*display: flex;*/
-    justify-content: center;
-    height: 5vh;
+    justify-content: space-around;
+    align-items: center;
+    height: 9vh;
 }
+
 
 .aSubmit button{
     width: 8vw;
@@ -112,7 +119,47 @@
     background-color: var(--attentionColor);
     border-radius: 10px;
 }
-
 .aSubmit button:hover{
     background-color: var(--actionColor);
+}
+
+#listTitle{
+    grid-area: listTitle;
+    display: flex;
+    justify-content: center;
+}
+#listTable{
+    grid-area: listTable;
+    display: flex;
+    justify-content: center;
+}
+#listFooter{
+    grid-area: listFooter;
+}
+#listTable #herdList {
+    width: 40vw;
+}
+
+#listTable #herdList tr{
+    height: 2vh;
+    align-content: center;
+    /*background-color: var();*/
+}
+#listTable #herdList td{
+    padding: 5px;
+    text-align: center;
+}
+
+.aSubmit #deleteBtn {
+    width: 8vw;
+    font-size: 22px;
+    font-weight: bold;
+    background-color: var(--attentionColor);
+    border-radius: 10px;
+    align-content: center;
+    text-align: center;
+    align-items: center;
+    justify-items: center;
+    justify-self: center;
+    text-justify: auto;
 }

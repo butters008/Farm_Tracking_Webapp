@@ -2,7 +2,7 @@
 .mainGridContainer{
     display: grid;
     grid-template-columns: 5fr;
-    grid-template-rows: 1fr 5fr 1fr;
+    grid-template-rows: 1fr 6fr 1fr;
     grid-template-areas:
             "headerContent"
             "mainContentContainer"
@@ -39,7 +39,7 @@
 .footerContent{
     grid-area: footerContent;
     height: 10vh;
-    background-color: aqua;
+    /*background-color: aqua;*/
 }
 /*-----------------------------*/
 /*header Grid Layout ----------*/
@@ -76,7 +76,7 @@
 
 #mainContent{
     grid-area: mainContent;
-    /*background-color: aquamarine;*/
+    /*background-color: var(--secondaryColor);*/
     width: 50vw;
 
 }
@@ -109,7 +109,19 @@
 
 }
 /*Add Animal Page-------END*/
-/*Add LOGIN Page----------*/
+/*Animal List Page---------*/
+#herdListPage{
+    display: grid;
+    grid-template-columns: 3fr;
+    grid-template-rows: .2fr 3fr 1fr;
+    grid-template-areas:
+        "listTitle"
+        "listTable"
+        "listFooter"
+}
+
+/*Animal List Page------END*/
+/*Add LOGIN Page-----------*/
 .loginPageStyle{
     display: grid;
     grid-template-columns: 2fr;
@@ -148,11 +160,10 @@
     width: 5vw;
     border-radius: 10px;
     font-size: medium;
-    background-color: var(--attentionColor);
+    /*background-color: var(--attentionColor);*/
 }
 
 .lSubmit button:hover{
     background-color: var(--actionColor);
 }
-
-/*Add LOGIN Page-------END*/
+/*Add LOGIN Page--------END*/

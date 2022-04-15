@@ -30,6 +30,9 @@ public class Animal {
     @Column(name = "animal_type")
     private String animalType;
 
+    @Column(name = "breed")
+    private String breed;
+
     @Column(name = "herd_status")
     private String herdStatus;
 
@@ -53,7 +56,7 @@ public class Animal {
     @ToString.Exclude
     private Set<ParentCalves> parentBull;
 
-    @OneToMany(mappedBy = "animal", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "animalId", fetch = FetchType.LAZY)
     @ToString.Exclude
     private Set<UserAnimal> userAnimals;
 }

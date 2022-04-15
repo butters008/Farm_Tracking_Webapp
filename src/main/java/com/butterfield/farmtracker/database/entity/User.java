@@ -33,7 +33,7 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "userId", fetch = FetchType.LAZY)
     @ToString.Exclude
     private Set<UserAnimal> userAnimals;
 
