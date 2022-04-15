@@ -25,8 +25,4 @@ public class HerdFormBean {
     private String boughtFrom;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate boughtDate;
-
-    public Integer getAnimalId() {
-        return id;
-    }
 }

@@ -16,9 +16,9 @@
 
                 <c:forEach items="${herd}" var="herdList">
                     <tr>
-                        <td><a href="./herdinfo?cowId=${herdList.animal.animalId1}">${herdList.animal.animalId1}</a></td>
-                        <td>${herdList.animal.animalId2}</td>
-                        <td>${herdList.animal.animalType}</td>
+                        <td><a href="./herdinfo?cowId=${herdList.animalId.animalId1}">${herdList.animalId.animalId1}</a></td>
+                        <td>${herdList.animalId.animalId2}</td>
+                        <td>${herdList.animalId.animalType}</td>
                     </tr>
                 </c:forEach>
         </table>

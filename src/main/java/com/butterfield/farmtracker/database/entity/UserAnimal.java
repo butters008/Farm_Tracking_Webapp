@@ -18,29 +18,29 @@ public class UserAnimal {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "user_id", updatable = false, insertable = false)
-    private Integer userId;
-
-    @Column(name = "animal_id", updatable = false, insertable = false)
-    private Integer animalId;
+//    @Column(name = "user_id", updatable = false, insertable = false)
+//    private Integer userId;
+//
+//    @Column(name = "animal_id", updatable = false, insertable = false)
+//    private Integer animalId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private User user;
+    private User userId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "animal_id")
-    private Animal animal;
+    private Animal animalId;
 
-    public UserAnimal(Integer userId, Integer animalId){
-        this.userId = userId;
-        this.animalId = animalId;
-    }
-
-    public UserAnimal(){
-        this.userId = null;
-        this.animalId = null;
-    }
+//    public UserAnimal(Integer userId, Integer animalId){
+//        this.userId = userId;
+//        this.animalId = animalId;
+//    }
+//
+//    public UserAnimal(){
+//        this.userId = null;
+//        this.animalId = null;
+//    }
 
 
 }

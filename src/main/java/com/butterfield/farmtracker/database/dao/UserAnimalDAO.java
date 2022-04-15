@@ -1,5 +1,7 @@
 package com.butterfield.farmtracker.database.dao;
 
+import com.butterfield.farmtracker.database.entity.Animal;
+import com.butterfield.farmtracker.database.entity.User;
 import com.butterfield.farmtracker.database.entity.UserAnimal;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
@@ -11,9 +13,9 @@ import java.util.List;
 public interface UserAnimalDAO extends JpaRepository<UserAnimal, Long> {
 
 
-    List<UserAnimal> findByUserId(@Param("userId") Integer userId);
+    List<UserAnimal> findByUserId(@Param("userId") User user);
 
-    UserAnimal findByAnimalId(@Param("animalId") Integer animalId);
+    UserAnimal findByAnimalId(@Param("animalId") Animal animal);
 
 
 }

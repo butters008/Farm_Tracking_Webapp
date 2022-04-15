@@ -1,22 +1,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--<%@include file="../../../pub/html/header.html" %>--%>
 <jsp:include page="../includes/header.jsp"/>
-<%--<jsp:include page="include/header.jsp"/>--%>
 <section id="mainContent">
-<%--<div id="addAnimalPage">--%>
-<%--<form  action="/herd/submitAnimal" method="get">--%>
-<form id="addAnimalPage"  action="/herd/submitAnimal" method="get">
+<form id="addAnimalPage"  action="/herd/submitAnimal" method="post">
     <div class="aTitle">
         <h1>Add Parent to Herd</h1>
     </div>
-
-
     <div class="aType">
-
-<%--        <label for="animalType">Animal Type</label><br>--%>
-<%--        Cow<input type="radio" id="cowRadio" name="animalType" value="cow">--%>
-<%--        Bull<input type="radio" id="bullRadio" name="animalType" value="bull">--%>
-
         <div id="animalType">
             <h2>Animal Type</h2>
             <table>
@@ -51,7 +40,7 @@
     <div class="aStatus">
         <label for="breed">Animal Breed</label><br>
         <input type="text" name="breed" id="breed"><br>
-        <label for="animalStatus">Animal Status</label><br>
+        <label for="animalStatus">Animal Type</label><br>
         <div id="animalStatus">
             Active<input type="radio" name="herdStatus" value="Active">
             Sold<input type="radio" name="herdStatus" value="Sold">
@@ -91,5 +80,5 @@
     </form>
 </div>
 
-<%--<%@include file="../../../pub/html/footer.html" %>--%>
+
 <jsp:include page="../includes/footer.jsp"/>

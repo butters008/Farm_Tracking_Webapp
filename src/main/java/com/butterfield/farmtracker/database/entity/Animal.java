@@ -56,7 +56,7 @@ public class Animal {
     @ToString.Exclude
     private Set<ParentCalves> parentBull;
 
-    @OneToMany(mappedBy = "animal", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "animalId", fetch = FetchType.LAZY)
     @ToString.Exclude
     private Set<UserAnimal> userAnimals;
 }

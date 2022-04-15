@@ -42,22 +42,14 @@ public class HerdController {
     @Autowired
     private HerdService herdService = new HerdService();
 
-    //Cannot do autowired since there is no bean
 
-
-    //Methods used for controllers
-
-
-    //Controller method used for views and business logic
-    //For right now I am going to hard code in list of cows
     @RequestMapping(value = "/herd/list", method = RequestMethod.GET)
     public ModelAndView listAllCows() throws Exception {
         ModelAndView response = new ModelAndView();
-        //Getting the info of the user that logged in
+
         User userLoggedIn = securityService.getLoggedInUser();
 
-        List<UserAnimal> userAnimals =  userAnimalDAO.findByUserId(userLoggedIn.getId());
-//        log.info(userAnimals.toString());
+        List<UserAnimal> userAnimals =  userAnimalDAO.findByUserId(userLoggedIn);
         response.addObject("herd", userAnimals);
 
         return response;
@@ -69,7 +61,6 @@ public class HerdController {
         ModelAndView response = new ModelAndView();
 
         Animal animal = herdDAO.findByAnimalId1(cowId);
-        log.info(animal.toString());
 
         response.setViewName("herd/herdinfo");
         response.addObject("herd", animal);
@@ -94,10 +85,12 @@ public class HerdController {
     }
 
 
-    @RequestMapping(value = "/herd/submitAnimal", method = RequestMethod.GET)
+    @RequestMapping(value = "/herd/submitAnimal", method = RequestMethod.POST)
     public ModelAndView submitAnimal(
-            @Valid HerdFormBean form, @RequestParam("dateOfBirth") String dob,
-            @RequestParam("dateOfDeath") String dod, @RequestParam("boughtDate") String bDate)
+            @Valid HerdFormBean form,
+            @RequestParam("dateOfBirth") String dob,
+            @RequestParam("dateOfDeath") String dod,
+            @RequestParam("boughtDate") String bDate)
             throws Exception {
         ModelAndView response = new ModelAndView();
 
@@ -117,23 +110,27 @@ public class HerdController {
             herdDAO.save(animal);
 
             //Creating a new userAnimal and submitting this to DB
-//            UserAnimal userAnimal = new UserAnimal();
+            UserAnimal userAnimal = new UserAnimal();
 
-//            userAnimal.setUserId(userLoggedIn.getId());
-//            userAnimal.setAnimalId(animal.getId());
+            userAnimal.setUserId(userLoggedIn);
+            userAnimal.setAnimalId(animal);
 
-            UserAnimal userAnimal = new UserAnimal(userLoggedIn.getId(), animal.getId());
+//            UserAnimal userAnimal = new UserAnimal(userLoggedIn.getId(), animal.getId());
 
             log.info("User Information: " + userLoggedIn);
 
             log.info("Animal Information" + animal);
-            log.info("Grabbing animal Id from userAnimal: " + userAnimal.getAnimalId());
-            log.info("Grabbing user Id from userAnimal: " + userAnimal.getUserId());
+//            log.info("Grabbing animal Id from userAnimal: " + userAnimal.getAnimalId());
+//            log.info("Grabbing user Id from userAnimal: " + userAnimal.getUserId());
 
             log.info("Grabbing userAnimal: " + userAnimal);
+            log.info(userAnimal.toString());
+
 
             userAnimalDAO.save(userAnimal);
 
+
+            log.info(userAnimal.toString());
             //Once completed, than return to view
             response.setViewName("herd/addAnimal");
 
@@ -148,25 +145,12 @@ public class HerdController {
             @RequestParam("boughtDate") String bDate) throws Exception {
         ModelAndView response = new ModelAndView();
 
-        //Getting the info of the user that logged in
-        User userLoggedIn = securityService.getLoggedInUser();
-
         log.info("Form coming in" + form.toString());
-        log.info("Animal Id that should be looked up: " + form.getAnimalId());
-        log.info("Animal Id that should be looked up: " + form.getAnimalId1());
         log.info("path variable: " +aID);
 
         Animal animal = herdDAO.findById(aID);
         log.info("Before Update: " + animal.toString());
-//        animal.setAnimalId1(form.getAnimalId1());
-//        animal.setAnimalId2(form.getAnimalId2());
-//        animal.setAnimalType(form.getAnimalType());
-//        animal.setBreed(breed);
-//        animal.setHerdStatus(form.getHerdStatus());
-//        animal.setBoughtFrom(form.getBoughtFrom());
-//        animal.setDateOfBirth(herdService.processDates(dob));
-//        animal.setDateOfDeath(herdService.processDates(dod));
-//        animal.setBoughtDate(herdService.processDates(bDate));
+
         animal = animalObjectInfo(form, dob, dod, bDate, animal, herdService);
         log.info("After Update: " + animal.toString());
         herdDAO.save(animal);
@@ -186,6 +170,22 @@ public class HerdController {
         animal.setDateOfDeath(herdService.processDates(dod));
         animal.setBoughtDate(herdService.processDates(bDate));
         return animal;
+    }
+
+
+    @RequestMapping(value = "/herd/delete/{aID}", method = RequestMethod.GET)
+    public ModelAndView deleteAnimal(@PathVariable("aID") Integer aID) throws Exception {
+        ModelAndView response = new ModelAndView();
+
+        Animal animalBegone = herdDAO.findById(aID);
+//        log.info(animalBegone.toString());
+        UserAnimal userAnimalBegone = userAnimalDAO.findByAnimalId(animalBegone);
+//        log.info(userAnimalBegone.toString());
+        userAnimalDAO.delete(userAnimalBegone);
+//        herdDAO.delete(animalBegone);
+
+        response.setViewName("redirect:/index");
+        return response;
     }
 
 
