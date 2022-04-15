@@ -30,6 +30,9 @@ public class Animal {
     @Column(name = "animal_type")
     private String animalType;
 
+    @Column(name = "breed")
+    private String breed;
+
     @Column(name = "herd_status")
     private String herdStatus;
 

@@ -41,4 +41,6 @@ public class UserAnimal {
         this.userId = null;
         this.animalId = null;
     }
+
+
 }

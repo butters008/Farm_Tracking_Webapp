@@ -2,7 +2,7 @@
 .mainGridContainer{
     display: grid;
     grid-template-columns: 5fr;
-    grid-template-rows: 1fr 5fr 1fr;
+    grid-template-rows: 1fr 6fr 1fr;
     grid-template-areas:
             "headerContent"
             "mainContentContainer"
@@ -160,7 +160,7 @@
     width: 5vw;
     border-radius: 10px;
     font-size: medium;
-    background-color: var(--attentionColor);
+    /*background-color: var(--attentionColor);*/
 }
 
 .lSubmit button:hover{

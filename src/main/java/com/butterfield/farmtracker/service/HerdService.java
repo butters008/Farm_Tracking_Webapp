@@ -1,5 +1,6 @@
 package com.butterfield.farmtracker.service;
 
+import com.butterfield.farmtracker.database.entity.UserAnimal;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -15,5 +16,13 @@ public class HerdService {
             LocalDate dateParsed = LocalDate.parse(date);
             return dateParsed;
         }
+
+    }
+
+    public String debugString(UserAnimal userAnimal) {
+        return "UserAnimal{" +
+                "userId=" + userAnimal.getUserId() +
+                ", animalId=" + userAnimal.getAnimalId() +
+                '}';
     }
 }

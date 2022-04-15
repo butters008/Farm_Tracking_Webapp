@@ -3,10 +3,10 @@
 <jsp:include page="../includes/header.jsp"/>
 <section id="mainContent">
 
-    <p>${cow}</p>
-    <form id="addAnimalPage"  action="/herd/submitAnimal" method="get">
+    <form id="addAnimalPage"  action="/herd/updateAnimal/${herd.id}" method="post">
         <div class="aTitle">
             <h1>Animal Information</h1>
+            <input type="text" name="id" id="id" value="${herd.id}" style="pointer-events: none;" disabled hidden>
         </div>
 
 
@@ -23,6 +23,11 @@
                         <td><input type="radio" id="cowRadio" name="animalType" value="cow"></td>
                         <td><input type="radio" id="bullRadio" name="animalType" value="bull"></td>
                     </tr>
+<%--                    <tr>--%>
+<%--                        <td>--%>
+<%--                            <input type="text" id="parentType" name="animalType" value="${herd.animalType}" disabled>--%>
+<%--                        </td>--%>
+<%--                    </tr>--%>
                     </tbody>
                 </table>
             </div>
@@ -34,13 +39,17 @@
 
         <div class="aID">
             <label for="animalId1">Animal ID #1</label><br>
-            <input type="text" name="animalId1" id="animalId1"><br>
+            <input type="text" name="animalId1" id="animalId1" value="${herd.animalId1}"><br>
 
             <label for="animalId2">Animal ID #2</label><br>
-            <input type="text" name="animalId2" id="animalId2"><br>
+            <input type="text" name="animalId2" id="animalId2" value="${herd.animalId2}"><br>
         </div>
 
+        <%-- They will have to recheck, just incase the status of animal changed --%>
+        <%-- TODO: Have a check to have so it auto fills what its is --%>
         <div class="aStatus">
+            <label for="breed">Animal Breed</label><br>
+            <input type="text" name="breed" id="breed" value="${herd.breed}"><br>
             <label for="animalStatus">Animal Type</label><br>
             <div id="animalStatus">
                 Active<input type="radio" name="herdStatus" value="Active">
@@ -48,25 +57,26 @@
                 Butchered<input type="radio" name="herdStatus" value="Butchered">
                 Dead<input type="radio" name="herdStatus" value="Dead">
             </div><br>
-            <label for="broughtFrom">Bought From</label>
-            <input type="text" name="broughtFrom" id="broughtFrom"><br>
+            <label for="boughtFrom">Bought From</label>
+            <input type="text" name="boughtFrom" id="boughtFrom" value="${herd.boughtFrom}"><br>
         </div>
 
         <div class="aDates">
             <div class="naturalDate">
                 <label for="dateOfBirth">Date of Birth</label>
-                <input type="date" name="dateOfBirth" id="dateOfBirth"><br>
+                <input type="date" name="dateOfBirth" id="dateOfBirth" value="${herd.dateOfBirth}"><br>
                 <label for="dateOfDeath">Date of Death</label>
-                <input type="date" name="dateOfDeath" id="dateOfDeath"><br>
+                <input type="date" name="dateOfDeath" id="dateOfDeath" value="${cow.dateOfDeath}"><br>
             </div>
             <div class="otherDate">
                 <label for="boughtDate">Date Bought</label><br>
-                <input type="date" name="boughtDate" id="boughtDate"><br>
+                <input type="date" name="boughtDate" id="boughtDate" value="${cow.boughtDate}"><br>
             </div>
         </div>
 
         <div class="aSubmit">
-            <button type="submit">Submit</button>
+            <a href="#delete" id="deleteBtn"><button type="button">Delete</button></a>
+            <button type="submit">Save</button>
         </div>
 
 

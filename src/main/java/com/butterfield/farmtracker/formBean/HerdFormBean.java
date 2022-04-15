@@ -16,6 +16,7 @@ public class HerdFormBean {
     private String animalId1;
     private String animalId2;
     private String animalType;
+    private String breed;
     private String herdStatus;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfBirth;
@@ -24,4 +25,8 @@ public class HerdFormBean {
     private String boughtFrom;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate boughtDate;
+
+    public Integer getAnimalId() {
+        return id;
+    }
 }

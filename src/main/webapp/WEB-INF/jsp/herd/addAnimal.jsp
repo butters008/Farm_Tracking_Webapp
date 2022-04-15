@@ -44,18 +44,22 @@
 
         <label for="animalId2">Animal ID #2</label><br>
         <input type="text" name="animalId2" id="animalId2"><br>
+
+
     </div>
 
     <div class="aStatus">
-        <label for="animalStatus">Animal Type</label><br>
+        <label for="breed">Animal Breed</label><br>
+        <input type="text" name="breed" id="breed"><br>
+        <label for="animalStatus">Animal Status</label><br>
         <div id="animalStatus">
             Active<input type="radio" name="herdStatus" value="Active">
             Sold<input type="radio" name="herdStatus" value="Sold">
             Butchered<input type="radio" name="herdStatus" value="Butchered">
             Dead<input type="radio" name="herdStatus" value="Dead">
         </div><br>
-        <label for="broughtFrom">Bought From</label>
-        <input type="text" name="boughtFrom" id="broughtFrom"><br>
+        <label for="boughtFrom">Bought From</label>
+        <input type="text" name="boughtFrom" id="boughtFrom"><br>
     </div>
 
     <div class="aDates">

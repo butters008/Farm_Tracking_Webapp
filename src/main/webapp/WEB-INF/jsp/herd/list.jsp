@@ -13,13 +13,14 @@
                 <th>Animal Id-2</th>
                 <th>Animal Type</th>
             </tr>
-            <c:forEach items="${cows}" var="cow">
-                <tr>
-                    <td><a href="./herdinfo?cowId=${cow.animalId1}">${cow.animalId1}</a></td>
-                    <td>${cow.animalId2}</td>
-                    <td>${cow.animalType}</td>
-                </tr>
-            </c:forEach>
+
+                <c:forEach items="${herd}" var="herdList">
+                    <tr>
+                        <td><a href="./herdinfo?cowId=${herdList.animal.animalId1}">${herdList.animal.animalId1}</a></td>
+                        <td>${herdList.animal.animalId2}</td>
+                        <td>${herdList.animal.animalType}</td>
+                    </tr>
+                </c:forEach>
         </table>
     </div>
     <div id="listFooter">
