@@ -182,7 +182,7 @@ public class HerdController {
         UserAnimal userAnimalBegone = userAnimalDAO.findByAnimalId(animalBegone);
 //        log.info(userAnimalBegone.toString());
         userAnimalDAO.delete(userAnimalBegone);
-//        herdDAO.delete(animalBegone);
+        herdDAO.delete(animalBegone);
 
         response.setViewName("redirect:/index");
         return response;
