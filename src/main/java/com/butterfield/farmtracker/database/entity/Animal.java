@@ -7,7 +7,6 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Set;
 
 @Data
@@ -50,11 +49,11 @@ public class Animal {
 
     @OneToMany(mappedBy = "cow", fetch = FetchType.LAZY)
     @ToString.Exclude
-    private Set<ParentCalves> parentCow;
+    private Set<ParentCalf> parentCow;
 
     @OneToMany(mappedBy = "bull", fetch = FetchType.LAZY)
     @ToString.Exclude
-    private Set<ParentCalves> parentBull;
+    private Set<ParentCalf> parentBull;
 
     @OneToMany(mappedBy = "animalId", fetch = FetchType.LAZY)
     @ToString.Exclude

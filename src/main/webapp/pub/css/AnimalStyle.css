@@ -1,4 +1,3 @@
-/*Not married to this, a lot is gonna change*/
 /*Add Animal and Calf pages*/
 .aTitle{
     grid-area: aTitle;
@@ -162,4 +161,65 @@
     justify-items: center;
     justify-self: center;
     text-justify: auto;
+}
+
+/*Calf styling*/
+.calfTitle{
+    grid-area: calfTitle;
+    /*background-color: #00850b;*/
+    display: flex;
+    justify-content: center;
+}
+.calfBasicInfo{
+    grid-area: calfBasicInfo;
+    /*background-color: aqua;*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.calfBasicInfo table {
+    margin-bottom: 25px;
+    margin-top: 25px;
+}
+
+.calfBasicInfo table td {
+    width:4vw;
+    text-align: center;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.weightAndParents table td {
+    width:6vw;
+    text-align: center;
+    padding-left: 35px;
+    padding-right: 35px;
+}
+
+.calfImage{
+    grid-area: calfImages;
+    background-color: #a46c02;
+}
+.calfExtraInfo{
+    grid-area: calfExtraInfo;
+    background-color: #919191;
+
+}
+.calfSubmit{
+    grid-area: calfSubmit;
+    /*background-color: aliceblue;*/
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.calfSubmit button{
+    height: 3.5vh;
+    width: 6vw;
+    border-radius: 5px;
+    background-color: var(--attentionColor);
+    font-size: large;
+}
+
+.calfSubmit button:hover{
+    background-color: var(--actionColor);
 }

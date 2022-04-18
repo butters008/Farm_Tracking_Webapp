@@ -18,12 +18,6 @@ public class UserAnimal {
     @Column(name = "id")
     private Integer id;
 
-//    @Column(name = "user_id", updatable = false, insertable = false)
-//    private Integer userId;
-//
-//    @Column(name = "animal_id", updatable = false, insertable = false)
-//    private Integer animalId;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User userId;
@@ -31,16 +25,4 @@ public class UserAnimal {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "animal_id")
     private Animal animalId;
-
-//    public UserAnimal(Integer userId, Integer animalId){
-//        this.userId = userId;
-//        this.animalId = animalId;
-//    }
-//
-//    public UserAnimal(){
-//        this.userId = null;
-//        this.animalId = null;
-//    }
-
-
 }

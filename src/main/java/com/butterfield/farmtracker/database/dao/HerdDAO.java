@@ -15,5 +15,4 @@ public interface HerdDAO extends JpaRepository<Animal, Long> {
     Animal findByAnimalId1(@Param("animalId1") String animalId1);
 
     List<Animal> findByAnimalType(@Param("animalType") String animalType);
-
 }

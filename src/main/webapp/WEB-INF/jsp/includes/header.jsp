@@ -35,7 +35,7 @@
                 <sec:authorize access="hasAnyAuthority('USER', 'ADMIN')">
                     <%-- TODO:Trying to make a drop-down => Gold Plate  --%>
                     <li class="navButton"><a href="../herd/addAnimal">Add Cow or Bull</a></li>
-                    <li class="navButton"><a href="../herd/addCalf">Add Calf</a></li>
+                    <li class="navButton"><a href="../herd/calfInfo">Add Calf</a></li>
                 </sec:authorize>
                 <sec:authorize access="hasAnyAuthority('USER', 'ADMIN')">
                     <li class="navButton"><a href="../herd/list">List</a></li>

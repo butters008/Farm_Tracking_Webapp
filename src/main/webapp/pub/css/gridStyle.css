@@ -167,3 +167,17 @@
     background-color: var(--actionColor);
 }
 /*Add LOGIN Page--------END*/
+/*Calf Page----------------*/
+.addCalfPage{
+    display: grid;
+    grid-template-columns: 2fr 1.2fr;
+    grid-template-rows: .5fr 1.2fr 2fr 1.2fr .5fr;
+    grid-template-areas:
+        "calfTitle calfTitle"
+        "calfBasicInfo calfImages"
+        "calfBasicInfo calfExtraInfo"
+        "calfBasicInfo calfExtraInfo"
+        "calfSubmit calfSubmit";
+}
+
+/*Calf Page-------------END*/
