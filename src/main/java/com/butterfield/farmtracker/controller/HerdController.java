@@ -1,9 +1,8 @@
 package com.butterfield.farmtracker.controller;
 
-import com.butterfield.farmtracker.database.dao.HerdDAO;
-import com.butterfield.farmtracker.database.dao.UserAnimalDAO;
-import com.butterfield.farmtracker.database.dao.UserDAO;
+import com.butterfield.farmtracker.database.dao.*;
 import com.butterfield.farmtracker.database.entity.Animal;
+import com.butterfield.farmtracker.database.entity.ParentCalf;
 import com.butterfield.farmtracker.database.entity.User;
 import com.butterfield.farmtracker.database.entity.UserAnimal;
 import com.butterfield.farmtracker.formBean.HerdFormBean;
@@ -37,6 +36,12 @@ public class HerdController {
     private UserAnimalDAO userAnimalDAO;
 
     @Autowired
+    private CalfDAO calfDAO;
+
+    @Autowired
+    private ParentCalfDAO parentCalfDAO;
+
+    @Autowired
     private SecurityService securityService = new SecurityService();
 
     @Autowired
@@ -48,7 +53,6 @@ public class HerdController {
         ModelAndView response = new ModelAndView();
 
         User userLoggedIn = securityService.getLoggedInUser();
-
         List<UserAnimal> userAnimals =  userAnimalDAO.findByUserId(userLoggedIn);
         response.addObject("herd", userAnimals);
 
@@ -61,6 +65,10 @@ public class HerdController {
         ModelAndView response = new ModelAndView();
 
         Animal animal = herdDAO.findByAnimalId1(cowId);
+        List<ParentCalf> parentCalves = parentCalfDAO.findAllByCowId(animal.getId());
+        log.info(parentCalves.toString());
+
+        response.addObject("calves", parentCalves);
 
         response.setViewName("herd/herdinfo");
         response.addObject("herd", animal);
@@ -115,23 +123,7 @@ public class HerdController {
             userAnimal.setUserId(userLoggedIn);
             userAnimal.setAnimalId(animal);
 
-//            UserAnimal userAnimal = new UserAnimal(userLoggedIn.getId(), animal.getId());
-
-            log.info("User Information: " + userLoggedIn);
-
-            log.info("Animal Information" + animal);
-//            log.info("Grabbing animal Id from userAnimal: " + userAnimal.getAnimalId());
-//            log.info("Grabbing user Id from userAnimal: " + userAnimal.getUserId());
-
-            log.info("Grabbing userAnimal: " + userAnimal);
-            log.info(userAnimal.toString());
-
-
             userAnimalDAO.save(userAnimal);
-
-
-            log.info(userAnimal.toString());
-            //Once completed, than return to view
             response.setViewName("herd/addAnimal");
 
         }
@@ -178,9 +170,7 @@ public class HerdController {
         ModelAndView response = new ModelAndView();
 
         Animal animalBegone = herdDAO.findById(aID);
-//        log.info(animalBegone.toString());
         UserAnimal userAnimalBegone = userAnimalDAO.findByAnimalId(animalBegone);
-//        log.info(userAnimalBegone.toString());
         userAnimalDAO.delete(userAnimalBegone);
         herdDAO.delete(animalBegone);
 

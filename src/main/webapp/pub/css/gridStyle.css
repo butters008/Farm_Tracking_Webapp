@@ -84,7 +84,7 @@
 #sideContent{
     grid-area: sideContent;
     width: 20vw;
-    background-color: aliceblue;
+    /*background-color: aliceblue;*/
 
 }
 
