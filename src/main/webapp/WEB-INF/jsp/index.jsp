@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--<%@include file="../../pub/html/header.html" %>--%>
 <jsp:include page="includes/header.jsp"/>
-<section id="mainContent">
+<section id="mainContent" >
     <h1>Hello</h1>
     <ul>
         ${user}
@@ -9,11 +9,20 @@
         <%--        <li>${user.firstName}</li>--%>
         <%--    </c:forEach>--%>
     </ul>
+    <button onclick="working()">JavaScript Function</button>
+    <button onclick="working2()">JavaScript Function 2</button>
 </section>
 <div id="sideContent">
 <%--    <button>Add Animal</button>--%>
 
 </div>
+
+<script>
+    function working(){
+        console.log("Inline JS worked");
+    }
+    window.onload = startFirst();
+</script>
 
 
 <jsp:include page="includes/footer.jsp"/>

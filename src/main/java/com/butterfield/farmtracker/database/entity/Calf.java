@@ -5,7 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Set;
 
 @Getter
@@ -25,25 +25,32 @@ public class Calf {
     @Column(name = "calf_id2")
     private String calfId2;
 
+    @Column(name = "breed")
+    private String breed;
+
+    @Column(name = "calf_sex")
+    private String calfSex;
+
     @Column(name = "birth_weight")
     private Integer birthWeight;
 
     @Column(name = "date_of_birth")
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
 
     @Column(name = "date_of_death")
-    private Date dateOfDeath;
+    private LocalDate dateOfDeath;
 
     @Column(name = "wean_weight")
     private Integer weanWeight;
 
     @Column(name = "wean_date")
-    private Date weanDate;
+    private LocalDate weanDate;
 
     @Column(name = "calf_status")
     private String calfStatus;
 
     @OneToMany(mappedBy = "calf", fetch = FetchType.LAZY)
     @ToString.Exclude
-    private Set<ParentCalves> parentCalves;
+    private Set<ParentCalf> parentCalves;
+
 }

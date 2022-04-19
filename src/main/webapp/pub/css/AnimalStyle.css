@@ -1,4 +1,3 @@
-/*Not married to this, a lot is gonna change*/
 /*Add Animal and Calf pages*/
 .aTitle{
     grid-area: aTitle;
@@ -132,7 +131,38 @@
     grid-area: listTable;
     display: flex;
     justify-content: center;
+    background-color: #595959;
+    color: var(--baseColor);
+    border-radius: 15px;
 }
+#listTable table thead{
+    background-color: var(--baseColor);
+    height: 4vh;
+    width: 100%;
+    color: var(--whiteText);
+    border: solid 2px black;
+}
+
+#listTable table button{
+    min-height: 2.5vh;
+    min-width: 8vh;
+    border-radius: 15px;
+    background-color: var(--actionColor)
+}
+
+#listTable table button:hover{
+    background-color: var(--attentionColor);
+    height: 2.75vh;
+}
+
+#listTable table thead th{
+    border: solid 2px black;
+}
+
+#listTable a{
+    text-decoration: none;
+}
+
 #listFooter{
     grid-area: listFooter;
 }
@@ -162,4 +192,102 @@
     justify-items: center;
     justify-self: center;
     text-justify: auto;
+}
+
+/*Calf styling*/
+.calfTitle{
+    grid-area: calfTitle;
+    /*background-color: #00850b;*/
+    display: flex;
+    justify-content: center;
+}
+.calfBasicInfo{
+    grid-area: calfBasicInfo;
+    /*background-color: aqua;*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /*For right now setting width manually*/
+    width: 45vw;
+}
+.calfBasicInfo table {
+    margin-bottom: 25px;
+    margin-top: 25px;
+}
+
+.calfBasicInfo table td {
+    width:4vw;
+    text-align: center;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.weightAndParents table td {
+    width:6vw;
+    text-align: center;
+    padding-left: 35px;
+    padding-right: 35px;
+}
+
+.calfImage{
+    grid-area: calfImages;
+    /*background-color: #a46c02;*/
+/*  For right now - later imp for full function  */
+    width: 1vw;
+}
+.calfExtraInfo{
+    grid-area: calfExtraInfo;
+    /*background-color: #919191;*/
+    /*  For right now - later imp for full function  */
+    width: 1vw;
+
+}
+.calfSubmit{
+    grid-area: calfSubmit;
+    /*background-color: aliceblue;*/
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.calfSubmit button{
+    height: 3.5vh;
+    width: 6vw;
+    border-radius: 5px;
+    background-color: var(--attentionColor);
+    font-size: large;
+}
+
+.calfSubmit button:hover{
+    background-color: var(--actionColor);
+}
+
+.calfExtraInfo {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.calfExtraInfo input{
+    width: 50%;
+}
+
+.CalfListOnHerd{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.CalfListOnHerd{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.CalfListOnHerd table button{
+    border-radius: 15px;
+    width: 2.5vw;
+    background-color: var(--attentionColor);
+}
+
+.CalfListOnHerd table button:hover{
+    background-color: var(--actionColor);
 }

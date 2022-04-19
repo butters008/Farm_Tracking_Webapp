@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../pub/css/BaseStyle.css">
     <link rel="stylesheet" href="../pub/css/gridStyle.css">
     <link rel="stylesheet" href="../pub/css/AnimalStyle.css">
+    <script src="../pub/js/working.js"></script>
     <!--  Link to font and other frameworks  -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&family=Roboto:wght@500&display=swap" rel="stylesheet">
     <!--  Remaining head information  -->
@@ -35,7 +36,7 @@
                 <sec:authorize access="hasAnyAuthority('USER', 'ADMIN')">
                     <%-- TODO:Trying to make a drop-down => Gold Plate  --%>
                     <li class="navButton"><a href="../herd/addAnimal">Add Cow or Bull</a></li>
-                    <li class="navButton"><a href="../herd/addCalf">Add Calf</a></li>
+                    <li class="navButton"><a href="../herd/calfInfo">Add Calf</a></li>
                 </sec:authorize>
                 <sec:authorize access="hasAnyAuthority('USER', 'ADMIN')">
                     <li class="navButton"><a href="../herd/list">List</a></li>

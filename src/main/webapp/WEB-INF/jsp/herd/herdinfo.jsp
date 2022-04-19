@@ -72,7 +72,29 @@
     </form>
 </section>
 <div id="sideContent">
-
+    <div class="CalfListOnHerd">
+        <h3>Calf List</h3>
+        <table style="background-color: rgba(129,129,129,0.47); border-radius: 15px;">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Calf ID (#1)</th>
+                    <th>Sex</th>
+                    <th>Birth Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <c:forEach items="${calves}" var="calfList">
+                <tr>
+                    <td><a href="./calfUpdate?calfId=${calfList.calf.id}"><button>Edit</button></a></td>
+                    <td>${calfList.calf.calfId1}</td>
+                    <td>${calfList.calf.calfSex}</td>
+                    <td>${calfList.calf.dateOfBirth}</td>
+                </tr>
+                </c:forEach>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 

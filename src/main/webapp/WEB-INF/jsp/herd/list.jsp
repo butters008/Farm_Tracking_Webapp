@@ -8,19 +8,29 @@
     </div>
     <div id="listTable">
         <table id="herdList">
-            <tr>
-                <th>Animal Id-1</th>
-                <th>Animal Id-2</th>
-                <th>Animal Type</th>
-            </tr>
-
+            <thead>
+                <tr>
+                    <th id="headStart"></th>
+                    <th>Animal Id-1</th>
+                    <th>Animal Id-2</th>
+                    <th>Animal Type</th>
+                    <th id="End">Status</th>
+                </tr>
+            </thead>
+            <tbody>
                 <c:forEach items="${herd}" var="herdList">
                     <tr>
-                        <td><a href="./herdinfo?cowId=${herdList.animalId.animalId1}">${herdList.animalId.animalId1}</a></td>
+                        <td>
+                            <a href="./herdinfo?cowId=${herdList.animalId.animalId1}"><button>Edit</button></a>&emsp;
+<%--                            <button style="background-color: var(--attentionColor)">Preview</button>--%>
+                        </td>
+                        <td>${herdList.animalId.animalId1}</td>
                         <td>${herdList.animalId.animalId2}</td>
                         <td>${herdList.animalId.animalType}</td>
+                        <td>${herdList.animalId.herdStatus}</td>
                     </tr>
                 </c:forEach>
+            </tbody>
         </table>
     </div>
     <div id="listFooter">
