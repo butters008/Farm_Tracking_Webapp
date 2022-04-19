@@ -145,11 +145,11 @@ public class CalfController {
         *  -X- Fix how to retrieve mom
         *  -X- Fix how to retrieve dad
         *  -X- Fix broken function of saving calf
-        *  8) Figure out how to make list of calves
+        *  -X- Figure out how to make list of calves
         *  9) Figure out how to delete calf
-        *  10) Figure out how to update calf
+        *  -X- Figure out how to update calf
         *  -X- Figure out how to get parent_calves to save
-        *  11) Going to have list of calves be printed out in cow page
+        *  -X- Going to have list of calves be printed out in cow page
         * */
         //Filling the calf object
         calf.setCalfId1(form.getCalfId1());
@@ -173,5 +173,19 @@ public class CalfController {
         response.setViewName("redirect:/herd/calfInfo");
         return response;
     }
+
+    @RequestMapping(value = "/herd/deleteCalf/{cID}", method = RequestMethod.GET)
+    public ModelAndView deleteCalf(@PathVariable("cID") Integer cID) throws Exception {
+        ModelAndView response = new ModelAndView();
+
+        Calf calfBegone = calfDAO.findById(cID);
+        ParentCalf parentCalfBegone = parentCalfDAO.findByCalfId(calfBegone.getId());
+        parentCalfDAO.delete(parentCalfBegone);
+        calfDAO.delete(calfBegone);
+
+        response.setViewName("redirect:/index");
+        return response;
+    }
+
 
 }

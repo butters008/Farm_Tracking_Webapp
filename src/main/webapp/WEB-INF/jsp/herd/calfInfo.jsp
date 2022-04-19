@@ -126,7 +126,7 @@
         </c:if>
         <c:if test="${not empty calf}">
             <%-- TODO: Finish delete function --%>
-            <button type="button"><strong>Delete</strong></button>
+            <a href="/herd/deleteCalf/${calf.id}"><button type="button"><strong>Delete</strong></button></a>
             <button><strong>Save</strong></button>
         </c:if>
     </div>

@@ -9,20 +9,13 @@
     <div class="aType">
         <div id="animalType">
             <h2>Animal Type</h2>
-            <table>
-                <tbody>
-                <tr>
-                    <td>Cow</td>
-                    <td>Bull</td>
-                </tr>
-                    <tr>
-                        <td><input type="radio" id="cowRadio" name="animalType" value="cow"></td>
-                        <td><input type="radio" id="bullRadio" name="animalType" value="bull"></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+            <select name="animalType">
+                <option value="${herd.animalType}" selected>${herd.animalType}</option>
+                <option value="cow">Cow</option>
+                <option value="bull">Bull</option>
+            </select>
         </div>
+    </div>
 
         <div class="aPic">
             srkfugjhb
@@ -39,12 +32,15 @@
         <div class="aStatus">
             <label for="breed">Animal Breed</label><br>
             <input type="text" name="breed" id="breed" value="${herd.breed}"><br>
-            <label for="animalStatus">Animal Type</label><br>
+            <label for="animalStatus">Animal Status</label><br>
             <div id="animalStatus">
-                Active<input type="radio" name="herdStatus" value="Active">
-                Sold<input type="radio" name="herdStatus" value="Sold">
-                Butchered<input type="radio" name="herdStatus" value="Butchered">
-                Dead<input type="radio" name="herdStatus" value="Dead">
+                <select name="herdStatus">
+                    <option value="${herd.herdStatus}" selected>${herd.herdStatus}</option>
+                    <option value="Active">Active</option>
+                    <option value="Sold">Sold</option>
+                    <option value="Butchered">Butchered</option>
+                    <option value="Dead">Dead</option>
+                </select>
             </div><br>
             <label for="boughtFrom">Bought From</label>
             <input type="text" name="boughtFrom" id="boughtFrom" value="${herd.boughtFrom}"><br>
