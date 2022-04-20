@@ -21,7 +21,7 @@ import java.util.List;
 
 @Slf4j
 @Controller
-@PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
+//@PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
 public class UserController {
 
     @Autowired
@@ -32,26 +32,6 @@ public class UserController {
     public ModelAndView register() throws Exception {
         ModelAndView response = new ModelAndView();
         response.setViewName("user/register");
-
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        log.info(" " + authentication.isAuthenticated());
-//
-//        String currentPrincipalName = authentication.getName();
-//        User userLoggedIn = userDAO.findByEmail(currentPrincipalName);
-//
-//
-//        if (userLoggedIn == null) {
-//            response.setViewName("redirect:/index");
-//        }
-//        else{
-//
-//        }
-
-//        if (authentication.isAuthenticated()) {
-//            String currentPrincipalName = authentication.getName();
-//            User user = userDAO.findByEmail(currentPrincipalName);
-//            response.addObject("user", user);
-//        }
 
         return response;
     }
@@ -108,57 +88,29 @@ public class UserController {
         return response;
     }
 
-
-    @GetMapping(value = "/user/edit/{userId}")
-    public ModelAndView editUser(@PathVariable("userId") Integer userId) throws Exception {
-        ModelAndView response = new ModelAndView();
-        response.setViewName("user/register");
-
-        User user = userDAO.findById(userId);
-
-        RegisterFormBean form = new RegisterFormBean();
-
-        form.setId(user.getId());
-        form.setEmail(user.getEmail());
-        form.setFirstName(user.getFirstName());
-        form.setLastName(user.getLastName());
-        form.setPassword(user.getPassword());
-        form.setPasswordConfirm(user.getPassword());
-
-        response.addObject("form", form);
-
-        return response;
-    }
-
-    @GetMapping(value = "/user/search")
-    public ModelAndView searchUser() throws Exception {
-        ModelAndView response = new ModelAndView();
-        response.setViewName("user/search");
-
-        List<User> users = userDAO.findByFirstName("BOB");
-        response.addObject("users", users);
-
-        return response;
-    }
-
-    @GetMapping(value = "/user/searchUserName")
-    public ModelAndView searchUserName(@RequestParam(value = "searchName", required = false) String name) throws Exception {
-        ModelAndView response = new ModelAndView();
-
-        log.info(name);
-
-        if (name != null || !name.equals("")) {
-            //rings true and errors
-            List<User> users = userDAO.findByFirstName(name);
-            response.addObject("users", users);
-            response.setViewName("user/search");
-
-        } else {
-            response.setViewName("redirect:/user/search");
-        }
-
-        return response;
-    }
-
+    /*
+    * TODO: This method will be revamped for profile page on updating
+    *  user information. Some info will probably be left as unchangeable.
+    * */
+//    @GetMapping(value = "/user/edit/{userId}")
+//    public ModelAndView editUser(@PathVariable("userId") Integer userId) throws Exception {
+//        ModelAndView response = new ModelAndView();
+//        response.setViewName("user/register");
+//
+//        User user = userDAO.findById(userId);
+//
+//        RegisterFormBean form = new RegisterFormBean();
+//
+//        form.setId(user.getId());
+//        form.setEmail(user.getEmail());
+//        form.setFirstName(user.getFirstName());
+//        form.setLastName(user.getLastName());
+//        form.setPassword(user.getPassword());
+//        form.setPasswordConfirm(user.getPassword());
+//
+//        response.addObject("form", form);
+//
+//        return response;
+//    }
 
 }

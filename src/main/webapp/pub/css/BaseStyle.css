@@ -79,3 +79,54 @@ body{
     align-items: center;
     flex-direction: column;
 }
+
+.errorPage{
+    display: flex;
+    flex-direction: column;
+}
+
+.rTitle{
+    grid-area: rTitle;
+    font-size: xx-large;
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*align-content: center;*/
+}
+
+.rBInfo{
+    grid-area: rBInfo;
+    display: flex;
+    font-size: large;
+    flex-direction: column;
+    justify-content: center;
+    /*align-content: center;*/
+}
+
+.rBInfo input{
+    height: 2vh;
+    width: 40%;
+    margin: auto;
+    border-radius: 15px;
+    text-align: center;
+    font-size: large;
+}
+
+.rSub button{
+    height: 4.5vh;
+    width: 6.5vw;
+    margin: auto;
+    border-radius: 15px;
+    font-size: x-large;
+    background-color: var(--attentionColor);
+}
+
+.rSub button:hover{
+    background-color: var(--actionColor);
+}
+
+.rSub{
+    grid-area: rSub;
+    display: flex;
+    /*flex-direction: column;*/
+    align-content: center;
+}
