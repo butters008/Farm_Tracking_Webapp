@@ -167,6 +167,18 @@
     background-color: var(--actionColor);
 }
 /*Add LOGIN Page--------END*/
+/*NEW USER Page------------*/
+.NewUserFormPage{
+    display: grid;
+    grid-template-columns: 3fr;
+    grid-template-rows: .5fr 3fr 1fr;
+    grid-template-areas:
+        "rTitle"
+        "rBInfo"
+        "rSub";
+    text-align: center;
+}
+/*NEW USER Page---------END*/
 /*Calf Page----------------*/
 .addCalfPage{
     display: grid;

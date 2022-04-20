@@ -1,57 +1,37 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--<%@include file="../../../pub/html/header.html" %>--%>
 <jsp:include page="../includes/header.jsp"/>
 <section id="mainContent">
-<form action="/user/registerSubmit" method="post">
-
-
-    <label for="animalType">Animal Type</label>
-    <div id="animalType">
-        Cow<input type="checkbox" name="checkbox" value="cow">
-        Bull<input type="checkbox" name="checkbox" value="bull">
-        Bull<input type="checkbox" name="checkbox" value="calf">
+<form action="/user/registerSubmit" method="post" class="NewUserFormPage">
+    <div class="rTitle">
+        <div class="rTitle">New User - Sign Up</div>
     </div>
+    <div class="rBInfo">
+        <label for="firstName">First Name</label><br>
+        <input type="text" name="firstName" id="firstName" onfocusout="validateFirstName()"/>
+        <div id="errorFname"></div><br>
 
-    <label for="animalId1">Animal ID #1</label>
-    <input type="text" name="animalId1" id="animalId1"><br>
+        <label for="lastName">Last Name</label><br>
+        <input type="text" name="lastName" id="lastName" onfocusout="validateLastName()"/>
+        <div id="errorLname"></div><br>
 
-    <label for="animalId2">Animal ID #2</label>
-    <input type="text" name="animalId2" id="animalId2"><br>
+        <label for="email">Email</label><br>
+        <input type="email" name="email" id="email" onfocusout="validateEmail()"/>
+        <div id="errorEmail"></div><br>
 
+        <label for="password">Password</label><br>
+        <input type="password" name="password" id="password" onfocusout="validatePassword()"/>
+        <span id="errorPassword"></span><br>
 
-
-
-
-
-    <br><br>
-    <button type="submit">Submit</button>
-
-
-
-<%--This was error handling when it came to the form--%>
-<%--    <c:forEach items='${bindingResult.getFieldErrors("email")}' var="error">--%>
-<%--        <div style="color: red;">${error.getDefaultMessage()}</div>--%>
-<%--    </c:forEach>--%>
-<%--First Name<input type="text" name="firstName" id="firstNameId" value="${form.firstName}"><br>--%>
-<%--<c:forEach items='${bindingResult.getFieldErrors("firstName")}' var="error">--%>
-<%--    <div style="color: red;">${error.getDefaultMessage()}</div>--%>
-<%--</c:forEach>--%>
-
-<%--Last Name<input type="text" name="lastName" id="lastNameId" value="${form.lastName}"><br>--%>
-<%--<c:forEach items='${bindingResult.getFieldErrors("lastName")}' var="error">--%>
-<%--    <div style="color: red;">${error.getDefaultMessage()}</div>--%>
-<%--</c:forEach>--%>
-
-<%--Password<input type="password" name="password" id="passwordId" value="${form.password}"><br>--%>
-<%--<c:forEach items='${bindingResult.getFieldErrors("password")}' var="error">--%>
-<%--    <div style="color: red;">${error.getDefaultMessage()}</div>--%>
-<%--</c:forEach>--%>
-
-<%--This was on top, dont think I need it, will add if needed--%>
-<%--<input type="hidden" name="id" value="${form.id}">--%>
-
-
+        <label for="passwordConfirm">Password Confirm</label><br>
+        <input type="password" name="password" id="passwordConfirm" onfocusout="validateConfirmPassword()"/>
+        <span id="errorConfirmPassword"></span><br>
+    </div>
+    <div class="rSub">
+        <button type="submit" id="submit">Submit</button>
+    </div>
 </form>
+
+<script src="../pub/js/UserForm.js"></script>
 
 </section>
 
