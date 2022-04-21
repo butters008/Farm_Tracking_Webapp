@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../includes/header.jsp"/>
 <section id="mainContent">
-<form id="addAnimalPage"  action="/herd/updateAnimal/${herd.id}" method="post">
+<form id="addAnimalPage" name="herdForm"  action="/herd/updateAnimal/${herd.id}" method="post">
     <div class="aTitle">
         <h1>Animal Information</h1>
         <input type="text" name="id" id="id" value="${herd.id}" style="pointer-events: none;" disabled hidden>
@@ -14,6 +14,7 @@
                 <option value="cow">Cow</option>
                 <option value="bull">Bull</option>
             </select>
+
         </div>
     </div>
 
@@ -24,7 +25,9 @@
         <div class="aID">
             <label for="animalId1">Animal ID #1</label><br>
             <input type="text" name="animalId1" id="animalId1" value="${herd.animalId1}"><br>
-
+            <c:forEach items='${bindingResult.getFieldErrors("animalId1")}' var="error">
+                <div style="color: red;">${error.getDefaultMessage()}</div>
+            </c:forEach>
             <label for="animalId2">Animal ID #2</label><br>
             <input type="text" name="animalId2" id="animalId2" value="${herd.animalId2}"><br>
         </div>
@@ -32,6 +35,9 @@
         <div class="aStatus">
             <label for="breed">Animal Breed</label><br>
             <input type="text" name="breed" id="breed" value="${herd.breed}"><br>
+            <c:forEach items='${bindingResult.getFieldErrors("breed")}' var="error">
+                <div style="color: red;">${error.getDefaultMessage()}</div>
+            </c:forEach>
             <label for="animalStatus">Animal Status</label><br>
             <div id="animalStatus">
                 <select name="herdStatus">
@@ -41,6 +47,9 @@
                     <option value="Butchered">Butchered</option>
                     <option value="Dead">Dead</option>
                 </select>
+                <c:forEach items='${bindingResult.getFieldErrors("herdStatus")}' var="error">
+                    <div style="color: red;">${error.getDefaultMessage()}</div>
+                </c:forEach>
             </div><br>
             <label for="boughtFrom">Bought From</label>
             <input type="text" name="boughtFrom" id="boughtFrom" value="${herd.boughtFrom}"><br>

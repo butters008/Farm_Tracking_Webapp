@@ -27,7 +27,7 @@
 
 .mainContentContainer{
     grid-area: mainContentContainer;
-    height: 70vh;
+    height: 80vh;
     /*background-color: #b70202;*/
     grid-template-columns: 1.2fr 3fr 1fr;
     grid-template-rows: 1fr;

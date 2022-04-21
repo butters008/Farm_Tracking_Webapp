@@ -10,7 +10,7 @@
     </div>
 </c:if>
 <c:if test="${empty calf}">
-<form class="addCalfPage" action="/herd/addNewCalf" method="post">
+<form class="addCalfPage" action="/herd/calfUpdate" method="post">
     <div class="calfTitle">
         <h2>Test Calf NEW CALF</h2>
     </div>
@@ -28,6 +28,9 @@
                 <tbody>
                     <tr>
                         <td><input type="text" name="calfId1" id="calfId1" value="${calf.calfId1}"></td>
+                        <c:forEach items='${bindingResult.getFieldErrors("calfId1")}' var="error">
+                            <div style="color: red;">${error.getDefaultMessage()}</div>
+                        </c:forEach>
                         <td><input type="text" name="calfId2" id="calfId2" value="${calf.calfId2}"></td>
                     </tr>
                     <tr>
@@ -35,6 +38,9 @@
                     </tr>
                     <tr>
                         <td><input type="text" name="breed" id="breed" value="${calf.breed}"></td>
+                        <c:forEach items='${bindingResult.getFieldErrors("breed")}' var="error">
+                            <div style="color: red;">${error.getDefaultMessage()}</div>
+                        </c:forEach>
                     </tr>
                 </tbody>
             </table>
@@ -49,8 +55,10 @@
                 <option value="MALE" >Male</option>
                 <option value="FEMALE" >Female</option>
             </select>
-
         </c:if>
+        <c:forEach items='${bindingResult.getFieldErrors("calfSex")}' var="error">
+            <div style="color: red;">${error.getDefaultMessage()}</div>
+        </c:forEach>
         <%-- RADIO inputs for empty calf objects, easy value caption --%>
         <c:if test="${empty calf}">
             <div id="calfSex">
