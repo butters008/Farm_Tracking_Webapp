@@ -3,18 +3,24 @@ package com.butterfield.farmtracker.controller;
 import com.butterfield.farmtracker.database.dao.CalfDAO;
 import com.butterfield.farmtracker.database.dao.HerdDAO;
 import com.butterfield.farmtracker.database.dao.ParentCalfDAO;
+import com.butterfield.farmtracker.database.dao.UserAnimalDAO;
 import com.butterfield.farmtracker.database.entity.*;
 import com.butterfield.farmtracker.formBean.CalfFormBean;
 import com.butterfield.farmtracker.security.SecurityService;
+import com.butterfield.farmtracker.service.HerdService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -32,16 +38,28 @@ public class CalfController {
     private ParentCalfDAO parentCalfDAO;
 
     @Autowired
+    private UserAnimalDAO userAnimalDAO;
+
+    @Autowired
     private SecurityService securityService = new SecurityService();
+
+    @Autowired
+    private HerdService herdService = new HerdService();
 
 
     @RequestMapping(value = "/herd/calfInfo", method = RequestMethod.GET)
     public ModelAndView calfInfo() throws Exception {
         ModelAndView response = new ModelAndView();
         response.setViewName("herd/calfInfo");
+
+        User user = securityService.getLoggedInUser();
+        List<UserAnimal> userAnimals = userAnimalDAO.findByUserId(user);
+
         //This is the list of cows for empty cow objects
-        List<Animal> cows = herdDAO.findByAnimalType("cow");
-        List<Animal> bulls = herdDAO.findByAnimalType("bull");
+        List<Animal> cows = herdService.getUserHerdCowList(userAnimals);
+        List<Animal> bulls = herdService.getUserHerdBullList(userAnimals);
+
+
 
         //Adding the object to page
         response.addObject("cows", cows);
@@ -51,15 +69,15 @@ public class CalfController {
     }
 
     /*
-    * Reason I can do this is because of the ./calfInfo?calfId=
-    * The ? is telling the @Request Param to start looking and I am telling
-    * Springboot that the param is "calfId" which than looks at the value
-    * which is right after the =
-    *
-    * So in short (param => ?calfId) (={calfId} <= value of param)
-    *
-    * (PSA) You don't see the {}number @RequestMapping,
-    *  but you see it in the tag from jsp page
+     * Reason I can do this is because of the ./calfInfo?calfId=
+     * The ? is telling the @Request Param to start looking and I am telling
+     * Springboot that the param is "calfId" which than looks at the value
+     * which is right after the =
+     *
+     * So in short (param => ?calfId) (={calfId} <= value of param)
+     *
+     * (PSA) You don't see the {}number @RequestMapping,
+     *  but you see it in the tag from jsp page
      * */
     @RequestMapping(value = "/herd/calfUpdate", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView updateInfo(@RequestParam("calfId") String calfId) throws Exception {
@@ -69,9 +87,12 @@ public class CalfController {
         Calf calf = calfDAO.findById(Integer.parseInt(calfId));
         ParentCalf parentCalf = parentCalfDAO.findByCalfId(calf.getId());
 
+        User user = securityService.getLoggedInUser();
+        List<UserAnimal> userAnimals = userAnimalDAO.findByUserId(user);
+
         //This is the list of cows for empty cow objects
-        List<Animal> cows = herdDAO.findByAnimalType("cow");
-        List<Animal> bulls = herdDAO.findByAnimalType("bull");
+        List<Animal> cows = herdService.getUserHerdCowList(userAnimals);
+        List<Animal> bulls = herdService.getUserHerdBullList(userAnimals);
 
         //Adding the object to page
         response.addObject("cows", cows);
@@ -88,9 +109,32 @@ public class CalfController {
     @RequestMapping(value = "/herd/UpdateCalf", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView updateCalf(@RequestParam("calfId") String calfId,
                                    @Valid CalfFormBean form,
+                                   BindingResult bindingResult,
                                    @RequestParam("dateOfBirth") String dob) throws Exception {
         ModelAndView response = new ModelAndView();
 
+        if (bindingResult.hasErrors()) {
+            List<String> errorMessages = new ArrayList<>();
+            for (ObjectError error : bindingResult.getAllErrors()) {
+                errorMessages.add(error.getDefaultMessage());
+                log.info(((FieldError) error).getField() + " " + error.getDefaultMessage());
+            }
+            log.info(errorMessages.toString());
+
+            User user = securityService.getLoggedInUser();
+            List<UserAnimal> userAnimals = userAnimalDAO.findByUserId(user);
+
+            //This is the list of cows for empty cow objects
+            List<Animal> cows = herdService.getUserHerdCowList(userAnimals);
+            List<Animal> bulls = herdService.getUserHerdBullList(userAnimals);
+            response.addObject("cows", cows);
+            response.addObject("bulls", bulls);
+
+            response.addObject("bindingResult", bindingResult);
+            response.addObject("calf", form);
+            response.setViewName("herd/calfInfo");
+            return response;
+        }//End of Error handling
 
         Calf calf = calfDAO.findById(Integer.parseInt(calfId));
         Animal cow = herdDAO.findById(Integer.parseInt(form.getMother()));
@@ -111,7 +155,7 @@ public class CalfController {
 
         parentCalfDAO.save(parentCalf);
 
-        response.setViewName("redirect:/herd/calfUpdate?calfId="+calf.getId());
+        response.setViewName("redirect:/herd/calfUpdate?calfId=" + calf.getId());
         return response;
     }
 
@@ -135,22 +179,6 @@ public class CalfController {
         log.info(cow.toString());
         log.info(bull.toString());
 
-        /*
-        * TODO: Thing we need todo to fix calf
-        *  -X- Add calf birthweight to DB
-        *  -X- Add entry for Breed
-        *  -X- Add Sex into DB
-        *  -X- Make the rest of required data work
-        *  -Abandoned- Make optional data work
-        *  -X- Fix how to retrieve mom
-        *  -X- Fix how to retrieve dad
-        *  -X- Fix broken function of saving calf
-        *  -X- Figure out how to make list of calves
-        *  9) Figure out how to delete calf
-        *  -X- Figure out how to update calf
-        *  -X- Figure out how to get parent_calves to save
-        *  -X- Going to have list of calves be printed out in cow page
-        * */
         //Filling the calf object
         calf.setCalfId1(form.getCalfId1());
         calf.setCalfId2(form.getCalfId2());

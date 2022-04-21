@@ -12,13 +12,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -76,6 +77,7 @@ public class HerdController {
 
     }
 
+    //The initial get for addAnimal jsp page
     @RequestMapping(value = "/herd/addAnimal", method = RequestMethod.GET)
     public ModelAndView addAnimalInital() throws Exception {
         ModelAndView response = new ModelAndView();
@@ -84,27 +86,19 @@ public class HerdController {
         return response;
     }
 
-    @RequestMapping(value = "/herd/animal", method = RequestMethod.GET)
-    public ModelAndView setupAnimalPage(@Valid HerdFormBean form) throws Exception {
-        ModelAndView response = new ModelAndView();
-
-        response.setViewName("herd/addAnimal");
-        return response;
-    }
-
-
     @RequestMapping(value = "/herd/submitAnimal", method = RequestMethod.POST)
     public ModelAndView submitAnimal(
             @Valid HerdFormBean form,
             @RequestParam("dateOfBirth") String dob,
             @RequestParam("dateOfDeath") String dod,
-            @RequestParam("boughtDate") String bDate)
-            throws Exception {
+            @RequestParam("boughtDate") String bDate,
+            BindingResult bindingResult) throws Exception {
         ModelAndView response = new ModelAndView();
 
         //Getting the info of the user that logged in
         User userLoggedIn = securityService.getLoggedInUser();
 
+        //And extra check to make sure no one is bypassing login
         if (userLoggedIn == null) {
             response.setViewName("redirect:/index");
         }
@@ -130,23 +124,37 @@ public class HerdController {
         return response;
     }
 
-    @RequestMapping(value = "/herd/updateAnimal/{aID}", method = RequestMethod.POST)
+    @RequestMapping(value = "/herd/updateAnimal/{aID}", method = {RequestMethod.POST, RequestMethod.GET})
     public ModelAndView updateAnimal( @PathVariable("aID") Integer aID,
-            @Valid HerdFormBean form, @RequestParam("breed") String breed,
+            @Valid HerdFormBean form, BindingResult bindingResult,
             @RequestParam("dateOfBirth") String dob, @RequestParam("dateOfDeath") String dod,
             @RequestParam("boughtDate") String bDate) throws Exception {
+        log.info("Before response");
         ModelAndView response = new ModelAndView();
+        log.info("Form bean brought in" + form.toString());
 
-        log.info("Form coming in" + form.toString());
-        log.info("path variable: " +aID);
+        if(bindingResult.hasErrors()){
+            log.info("We are inside the funtion");
+            List<String> errorMessages = new ArrayList<>();
+
+            for (ObjectError error : bindingResult.getAllErrors()) {
+                errorMessages.add(error.getDefaultMessage());
+                log.info(((FieldError) error).getField() + " " + error.getDefaultMessage());
+            }
+
+            log.info(errorMessages.toString());
+            log.info("Form Bean" + form.toString());
+            response.addObject("bindingResult", bindingResult);
+            response.addObject("herd", form);
+//            response.setViewName("redirect:/herd/herdinfo?cowId= " + form.getAnimalId1() + "");
+//            response.
+            response.setViewName("herd/herdinfo");
+            return response;
+        }//End of error handing
 
         Animal animal = herdDAO.findById(aID);
-        log.info("Before Update: " + animal.toString());
-
         animal = animalObjectInfo(form, dob, dod, bDate, animal, herdService);
-        log.info("After Update: " + animal.toString());
         herdDAO.save(animal);
-
         response.setViewName("redirect:/herd/list");
         return response;
     }

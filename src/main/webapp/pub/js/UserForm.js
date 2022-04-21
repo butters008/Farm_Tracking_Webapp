@@ -1,5 +1,3 @@
-const submit = document.getElementById("submit");
-
 const validateFirstName = () => {
     //Define variables
     let regNums = new RegExp("[0-9]");
@@ -125,33 +123,7 @@ const validateConfirmPassword = () =>{
         } else {
             error.textContent = "Passwords need to match"
             error.style.color = "red"
-}
+        }
     }
 }
-
-const mainValidateFunction = (e) => {
-    e.preventDefault();
-    let fNameCheck = validateFirstName();
-    let lNameCheck = validateLastName();
-    let emailCheck = validateEmail();
-    let passwordCheck = validatePassword();
-    let confirmPasswordCheck = validateConfirmPassword();
-    if(
-        fNameCheck == true &&
-        lNameCheck == true &&
-        emailCheck == true &&
-        passwordCheck == true &&
-        confirmPasswordCheck == true
-    )
-    {
-        console.log("Passed");
-        window.location.href = 'web.html';
-    }
-    else{
-        alert("Failed to submit, please enter correct information");
-        window.location.href = 'register.html';
-    }
-}
-
-submit.addEventListener("click",mainValidateFunction);
 

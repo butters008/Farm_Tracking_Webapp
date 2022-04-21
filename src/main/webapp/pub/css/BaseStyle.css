@@ -44,7 +44,6 @@ body{
     display: flex;
     flex-direction: column;
     text-align: center;
-    /*    border-radius: 5px;*/
 }
 
 .navButton{
@@ -65,11 +64,9 @@ body{
 }
 
 .navButton a:hover{
-    /*background-color: var(--overlayColor);*/
     background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0%, var(--overlayColor)100%);
     border-bottom: 1px solid var(--whiteText);
     border-radius: 10px;
-    /*width: 70px;*/
 
 }
 
@@ -88,9 +85,6 @@ body{
 .rTitle{
     grid-area: rTitle;
     font-size: xx-large;
-    /*display: flex;*/
-    /*flex-direction: column;*/
-    /*align-content: center;*/
 }
 
 .rBInfo{
@@ -99,7 +93,6 @@ body{
     font-size: large;
     flex-direction: column;
     justify-content: center;
-    /*align-content: center;*/
 }
 
 .rBInfo input{
@@ -127,6 +120,5 @@ body{
 .rSub{
     grid-area: rSub;
     display: flex;
-    /*flex-direction: column;*/
     align-content: center;
 }
