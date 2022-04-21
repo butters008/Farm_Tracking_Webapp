@@ -17,7 +17,6 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 
 @DataJpaTest
-@ActiveProfiles("test")
 @TestMethodOrder(OrderAnnotation.class)
 @AutoConfigureTestDatabase(replace= AutoConfigureTestDatabase.Replace.NONE)
 public class TestHerdDAO {
@@ -54,8 +53,8 @@ public class TestHerdDAO {
     @Order(2)
     @Rollback(value = false)
     public void readAnimalTest(){
-        Animal expected = herdDAO.findById(1);
-        Assertions.assertThat(expected.getId()).isEqualTo(1);
+        Animal expected = herdDAO.findByAnimalId1("Y123");
+        Assertions.assertThat(expected.getAnimalId1()).isEqualTo("Y123");
     }
 
     @Test

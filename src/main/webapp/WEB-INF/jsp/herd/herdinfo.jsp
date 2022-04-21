@@ -18,63 +18,59 @@
         </div>
     </div>
 
-        <div class="aPic">
-            srkfugjhb
+    <div class="aPic">
+        srkfugjhb
+    </div>
+
+    <div class="aID">
+        <label for="animalId1">Animal ID #1</label><br>
+        <input type="text" name="animalId1" id="animalId1" onfocusout="validateAnimalId1()" value="${herd.animalId1}"><br>
+        <div id="errorAId1"></div><br>
+
+        <label for="animalId2">Animal ID #2</label><br>
+        <input type="text" name="animalId2" id="animalId2" value="${herd.animalId2}"><br>
+    </div>
+
+    <div class="aStatus">
+        <label for="breed">Animal Breed</label><br>
+        <input type="text" name="breed" id="breed" onfocusout="validateBreed()" value="${herd.breed}"><br>
+        <div id="errorBreed"></div><br>
+
+        <label for="animalStatus">Animal Status</label><br>
+        <div id="animalStatus">
+            <select name="herdStatus">
+                <option value="${herd.herdStatus}" selected>${herd.herdStatus}</option>
+                <option value="Active">Active</option>
+                <option value="Sold">Sold</option>
+                <option value="Butchered">Butchered</option>
+                <option value="Dead">Dead</option>
+            </select>
+        </div><br>
+        <label for="boughtFrom">Bought From</label>
+        <input type="text" name="boughtFrom" id="boughtFrom" value="${herd.boughtFrom}"><br>
+    </div>
+
+    <div class="aDates">
+        <div class="naturalDate">
+            <label for="dateOfBirth">Date of Birth</label>
+            <input type="date" name="dateOfBirth" id="dateOfBirth" value="${herd.dateOfBirth}"><br>
+            <label for="dateOfDeath">Date of Death</label>
+            <input type="date" name="dateOfDeath" id="dateOfDeath" value="${herd.dateOfDeath}"><br>
         </div>
-
-        <div class="aID">
-            <label for="animalId1">Animal ID #1</label><br>
-            <input type="text" name="animalId1" id="animalId1" value="${herd.animalId1}"><br>
-            <c:forEach items='${bindingResult.getFieldErrors("animalId1")}' var="error">
-                <div style="color: red;">${error.getDefaultMessage()}</div>
-            </c:forEach>
-            <label for="animalId2">Animal ID #2</label><br>
-            <input type="text" name="animalId2" id="animalId2" value="${herd.animalId2}"><br>
+        <div class="otherDate">
+            <label for="boughtDate">Date Bought</label><br>
+            <input type="date" name="boughtDate" id="boughtDate" value="${herd.boughtDate}"><br>
         </div>
+    </div>
 
-        <div class="aStatus">
-            <label for="breed">Animal Breed</label><br>
-            <input type="text" name="breed" id="breed" value="${herd.breed}"><br>
-            <c:forEach items='${bindingResult.getFieldErrors("breed")}' var="error">
-                <div style="color: red;">${error.getDefaultMessage()}</div>
-            </c:forEach>
-            <label for="animalStatus">Animal Status</label><br>
-            <div id="animalStatus">
-                <select name="herdStatus">
-                    <option value="${herd.herdStatus}" selected>${herd.herdStatus}</option>
-                    <option value="Active">Active</option>
-                    <option value="Sold">Sold</option>
-                    <option value="Butchered">Butchered</option>
-                    <option value="Dead">Dead</option>
-                </select>
-                <c:forEach items='${bindingResult.getFieldErrors("herdStatus")}' var="error">
-                    <div style="color: red;">${error.getDefaultMessage()}</div>
-                </c:forEach>
-            </div><br>
-            <label for="boughtFrom">Bought From</label>
-            <input type="text" name="boughtFrom" id="boughtFrom" value="${herd.boughtFrom}"><br>
-        </div>
-
-        <div class="aDates">
-            <div class="naturalDate">
-                <label for="dateOfBirth">Date of Birth</label>
-                <input type="date" name="dateOfBirth" id="dateOfBirth" value="${herd.dateOfBirth}"><br>
-                <label for="dateOfDeath">Date of Death</label>
-                <input type="date" name="dateOfDeath" id="dateOfDeath" value="${herd.dateOfDeath}"><br>
-            </div>
-            <div class="otherDate">
-                <label for="boughtDate">Date Bought</label><br>
-                <input type="date" name="boughtDate" id="boughtDate" value="${herd.boughtDate}"><br>
-            </div>
-        </div>
-
-        <div class="aSubmit">
-            <a href="./delete/${herd.id}" id="deleteBtn"><button type="button">Delete</button></a>
-            <button type="submit">Save</button>
-        </div>
+    <div class="aSubmit">
+        <a href="./delete/${herd.id}" id="deleteBtn"><button type="button">Delete</button></a>
+        <button type="submit" id="button">Save</button>
+    </div>
 
 
-    </form>
+</form>
+<script src="../pub/js/CowForm.js"></script>
 </section>
 <div id="sideContent">
     <div class="CalfListOnHerd">

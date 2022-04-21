@@ -10,7 +10,7 @@
     </div>
 </c:if>
 <c:if test="${empty calf}">
-<form class="addCalfPage" action="/herd/calfUpdate" method="post">
+<form class="addCalfPage" action="/herd/addNewCalf" method="post">
     <div class="calfTitle">
         <h2>Test Calf NEW CALF</h2>
     </div>
@@ -143,6 +143,24 @@
 </form>
 </section>
 <div id="sideContent">
+    <h3>Optional Information</h3>
+    <table>
+        <thead>
+        <tr>
+            <th>Relative</th>
+            <th>Info Title</th>
+            <th>Info input</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><input type="checkbox" value="null"></td>
+            <td><label for="dateOfDeath">DoD</label></td>
+            <td><input type="date" id="dateOfDeath"></td>
+        </tr>
+
+        </tbody>
+    </table>
 
 </div>
 

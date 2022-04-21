@@ -21,7 +21,6 @@ import org.springframework.test.context.ActiveProfiles;
 import java.time.LocalDate;
 
 @DataJpaTest
-@ActiveProfiles("test")
 @TestMethodOrder(OrderAnnotation.class)
 @AutoConfigureTestDatabase(replace= AutoConfigureTestDatabase.Replace.NONE)
 public class TestCalfDAO {
@@ -34,28 +33,6 @@ public class TestCalfDAO {
 
     @Autowired
     private ParentCalfDAO parentCalfDAO;
-
-
-    static Animal testCow = new Animal();
-
-    static Animal testBull = new Animal();
-
-    ParentCalf testParentCalf = new ParentCalf();
-
-
-//    @BeforeEach
-//    public void setup(){
-//        testCow.setAnimalId1("cow-testCalf");
-//        testCow.setAnimalType("cow");
-//        testCow.setHerdStatus("active");
-//        testBull.setAnimalId1("bull-testCalf");
-//        testBull.setAnimalType("bull");
-//        testBull.setHerdStatus("active");
-//
-//        testParentCalf.setCow(testCow);
-//        testParentCalf.setBull(testBull);
-//
-//    }
 
     @ParameterizedTest
     @Order(1)
