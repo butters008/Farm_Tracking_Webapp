@@ -8,8 +8,11 @@
     <link rel="stylesheet" href="../pub/css/gridStyle.css">
     <link rel="stylesheet" href="../pub/css/AnimalStyle.css">
     <script src="../pub/js/working.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <!--  Link to font and other frameworks  -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&family=Roboto:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&family=Roboto:wght@500&display=swap"
+          rel="stylesheet">
     <!--  Remaining head information  -->
     <title>Title</title>
 </head>
