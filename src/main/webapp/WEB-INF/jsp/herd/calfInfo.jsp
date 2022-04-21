@@ -10,7 +10,7 @@
     </div>
 </c:if>
 <c:if test="${empty calf}">
-<form class="addCalfPage" action="/herd/calfUpdate" method="post">
+<form class="addCalfPage" action="/herd/addNewCalf" method="post">
     <div class="calfTitle">
         <h2>Test Calf NEW CALF</h2>
     </div>
