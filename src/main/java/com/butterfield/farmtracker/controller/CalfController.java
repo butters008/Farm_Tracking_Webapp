@@ -59,8 +59,6 @@ public class CalfController {
         List<Animal> cows = herdService.getUserHerdCowList(userAnimals);
         List<Animal> bulls = herdService.getUserHerdBullList(userAnimals);
 
-
-
         //Adding the object to page
         response.addObject("cows", cows);
         response.addObject("bulls", bulls);
@@ -68,17 +66,7 @@ public class CalfController {
         return response;
     }
 
-    /*
-     * Reason I can do this is because of the ./calfInfo?calfId=
-     * The ? is telling the @Request Param to start looking and I am telling
-     * Springboot that the param is "calfId" which than looks at the value
-     * which is right after the =
-     *
-     * So in short (param => ?calfId) (={calfId} <= value of param)
-     *
-     * (PSA) You don't see the {}number @RequestMapping,
-     *  but you see it in the tag from jsp page
-     * */
+
     @RequestMapping(value = "/herd/calfUpdate", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView updateInfo(@RequestParam("calfId") String calfId) throws Exception {
         ModelAndView response = new ModelAndView();
@@ -104,8 +92,6 @@ public class CalfController {
         return response;
     }
 
-    //Stupid I know but for right now...it works
-    // TODO: Combine the two methods into one
     @RequestMapping(value = "/herd/UpdateCalf", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView updateCalf(@RequestParam("calfId") String calfId,
                                    @Valid CalfFormBean form,
@@ -161,9 +147,8 @@ public class CalfController {
 
     @RequestMapping(value = "/herd/addNewCalf", method = RequestMethod.POST)
     public ModelAndView addNewCalf(@Valid CalfFormBean form,
-                                   @RequestParam("dateOfBirth") String dob
-
-    ) throws Exception {
+                                   BindingResult bindingResult,
+                                   @RequestParam("dateOfBirth") String dob) throws Exception {
         ModelAndView response = new ModelAndView();
 
         //Making the objects
@@ -171,6 +156,29 @@ public class CalfController {
         Animal bull = herdDAO.findById(Integer.parseInt(form.getFather()));
         Calf calf = new Calf();
         ParentCalf herdConnection = new ParentCalf();
+
+        if (bindingResult.hasErrors()) {
+            List<String> errorMessages = new ArrayList<>();
+            for (ObjectError error : bindingResult.getAllErrors()) {
+                errorMessages.add(error.getDefaultMessage());
+                log.info(((FieldError) error).getField() + " " + error.getDefaultMessage());
+            }
+            log.info(errorMessages.toString());
+
+            User user = securityService.getLoggedInUser();
+            List<UserAnimal> userAnimals = userAnimalDAO.findByUserId(user);
+
+            //This is the list of cows for empty cow objects
+            List<Animal> cows = herdService.getUserHerdCowList(userAnimals);
+            List<Animal> bulls = herdService.getUserHerdBullList(userAnimals);
+            response.addObject("cows", cows);
+            response.addObject("bulls", bulls);
+
+            response.addObject("bindingResult", bindingResult);
+            response.addObject("calf", form);
+            response.setViewName("herd/calfInfo");
+            return response;
+        }//End of Error handling
 
         //Logged form bean to make sure data is coming over
         log.info(form.toString());

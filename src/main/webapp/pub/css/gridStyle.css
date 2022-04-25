@@ -7,19 +7,15 @@
             "headerContent"
             "mainContentContainer"
             "footerContent";
-    /*gap: 0.5em;*/
 }
 
 .headerContent{
     grid-area: headerContent;
-    /*height: 10vh;*/
-    /*background-color: #00850b;*/
     grid-template-columns: 1fr 2fr 1fr;
     grid-template-rows: 1fr;
     grid-template-areas: "siteLogo headerSearch headerAccount";
     display: flex;
     justify-content: space-between;
-    /*TODO: Ask Raheem why not working*/
     align-items: center;
     border-bottom: 1px solid white;
     margin-bottom: 1vh;
@@ -28,7 +24,6 @@
 .mainContentContainer{
     grid-area: mainContentContainer;
     height: 80vh;
-    /*background-color: #b70202;*/
     grid-template-columns: 1.2fr 3fr 1fr;
     grid-template-rows: 1fr;
     grid-template-areas: "navContainer mainContent sideContent";
@@ -39,20 +34,19 @@
 .footerContent{
     grid-area: footerContent;
     height: 10vh;
-    /*background-color: aqua;*/
 }
 /*-----------------------------*/
 /*header Grid Layout ----------*/
 #siteLogo{
     grid-area: siteLogo;
-    /*background-color: antiquewhite;*/
     height: 100%;
     width: 20vw;
+    display: flex;
+    align-items: center;
 }
 
 #headerSearch{
     grid-area: headerSearch;
-    /*background-color: cadetblue;*/
     height: 100%;
     width: 30vw;
     display: flex;
@@ -63,9 +57,10 @@
 
 #headerAccount{
     grid-area: headerAccount;
-    background-color: chocolate;
     height: 100%;
     width: 20vw;
+    display: flex;
+    align-items: center;
 }
 /*-----------------------------*/
 /*MainContentContainer Grid Layout ----------*/
@@ -76,16 +71,12 @@
 
 #mainContent{
     grid-area: mainContent;
-    /*background-color: var(--secondaryColor);*/
     width: 50vw;
-
 }
 
 #sideContent{
     grid-area: sideContent;
     width: 20vw;
-    /*background-color: aliceblue;*/
-
 }
 
 /*This is on specific pages*/
@@ -100,13 +91,6 @@
     "aID aStatus"
     "aID aDates"
     "aSubmit aSubmit";
-    /*display: flex;*/
-    /*justify-content: space-around;*/
-    /*align-items: center;*/
-    /*gap: 0.5em;*/
-    /*margin: 1em;*/
-
-
 }
 /*Add Animal Page-------END*/
 /*Animal List Page---------*/
@@ -160,7 +144,6 @@
     width: 5vw;
     border-radius: 10px;
     font-size: medium;
-    /*background-color: var(--attentionColor);*/
 }
 
 .lSubmit button:hover{
@@ -193,3 +176,15 @@
 }
 
 /*Calf Page-------------END*/
+/*Index Page---------------*/
+#userIndex{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: .5fr 2.5fr 3.5fr;
+    grid-template-areas:
+        "iTitle iTitle iTitle"
+        "iBull iCow iCalf"
+        "iBail dAvgC dAvgC";
+    gap: 1em;
+}
+/*Index Page------------END*/

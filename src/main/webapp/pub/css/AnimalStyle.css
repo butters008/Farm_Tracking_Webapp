@@ -1,25 +1,21 @@
 /*Add Animal and Calf pages*/
 .aTitle{
     grid-area: aTitle;
-    /*background-color: #00850b;*/
     height: 10vh;
     text-align: center;
     font-size: 30px;
     display: flex;
     align-items: center;
-    /*align-content: center;*/
     justify-content: center;
 }
 
 .aType{
     grid-area: aType;
-    /*background-color: #b70202;*/
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
-
 
 .aType #animalType h2{
     text-align: center;
@@ -39,16 +35,10 @@
 
 .aPic{
     grid-area: aPic;
-    background-color: #a46c02;
-    /*width: 10vw;*/
-    /*height: 10vh;*/
-    /*display: flex;*/
-    /*justify-content: space-around;*/
 }
 
 .aID{
     grid-area: aID;
-    /*background-color: #1985e5;*/
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -61,7 +51,6 @@
 
 .aStatus{
     grid-area: aStatus;
-    /*background-color: aquamarine;*/
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -80,11 +69,8 @@
 
 .aDates{
     grid-area: aDates;
-    /*background-color: aqua;*/
     display: flex;
-    /*height: 15vh;*/
     justify-content: space-around;
-    /*flex-direction: column;*/
     align-items: center;
 }
 
@@ -102,14 +88,11 @@
 
 .aSubmit{
     grid-area: aSubmit;
-    /*background-color: blueviolet;*/
     display: flex;
-    /*display: flex;*/
     justify-content: space-around;
     align-items: center;
     height: 9vh;
 }
-
 
 .aSubmit button{
     width: 8vw;
@@ -118,6 +101,7 @@
     background-color: var(--attentionColor);
     border-radius: 10px;
 }
+
 .aSubmit button:hover{
     background-color: var(--actionColor);
 }
@@ -127,6 +111,7 @@
     display: flex;
     justify-content: center;
 }
+
 #listTable{
     grid-area: listTable;
     display: flex;
@@ -135,29 +120,37 @@
     color: var(--baseColor);
     border-radius: 15px;
 }
+
+#listTable table{
+    border-collapse: collapse;
+
+}
+
 #listTable table thead{
     background-color: var(--baseColor);
-    height: 4vh;
+    height: 7vh;
+    font-size: large;
     width: 100%;
     color: var(--whiteText);
     border: solid 2px black;
+    border-radius: 25px;
 }
 
 #listTable table button{
     min-height: 2.5vh;
     min-width: 8vh;
     border-radius: 15px;
-    background-color: var(--actionColor)
+    background-color: var(--attentionColor);
 }
 
 #listTable table button:hover{
-    background-color: var(--attentionColor);
-    height: 2.75vh;
+    background-color: var(--actionColor);
 }
 
-#listTable table thead th{
-    border: solid 2px black;
-}
+/*#listTable table thead tr{*/
+/*    border-radius: 15px;*/
+
+/*}*/
 
 #listTable a{
     text-decoration: none;
@@ -173,8 +166,8 @@
 #listTable #herdList tr{
     height: 2vh;
     align-content: center;
-    /*background-color: var();*/
 }
+
 #listTable #herdList td{
     padding: 5px;
     text-align: center;
@@ -197,19 +190,18 @@
 /*Calf styling*/
 .calfTitle{
     grid-area: calfTitle;
-    /*background-color: #00850b;*/
     display: flex;
     justify-content: center;
 }
+
 .calfBasicInfo{
     grid-area: calfBasicInfo;
-    /*background-color: aqua;*/
     display: flex;
     flex-direction: column;
     align-items: center;
-    /*For right now setting width manually*/
     width: 45vw;
 }
+
 .calfBasicInfo table {
     margin-bottom: 25px;
     margin-top: 25px;
@@ -221,6 +213,7 @@
     padding-left: 15px;
     padding-right: 15px;
 }
+
 .weightAndParents table td {
     width:6vw;
     text-align: center;
@@ -230,20 +223,17 @@
 
 .calfImage{
     grid-area: calfImages;
-    /*background-color: #a46c02;*/
-/*  For right now - later imp for full function  */
     width: 1vw;
 }
+
 .calfExtraInfo{
     grid-area: calfExtraInfo;
-    /*background-color: #919191;*/
-    /*  For right now - later imp for full function  */
     width: 1vw;
 
 }
+
 .calfSubmit{
     grid-area: calfSubmit;
-    /*background-color: aliceblue;*/
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -266,6 +256,7 @@
     flex-direction: column;
     text-align: center;
 }
+
 .calfExtraInfo input{
     width: 50%;
 }
@@ -290,4 +281,19 @@
 
 .CalfListOnHerd table button:hover{
     background-color: var(--actionColor);
+}
+
+.herdDropDownInput{
+    width: 40%;
+    text-align: center;
+    height: 3vh;
+    border-radius: 5px;
+}
+
+#aTypeDropDown{
+    width: 100%;
+}
+
+#calfDropDown{
+    width: 60%;
 }

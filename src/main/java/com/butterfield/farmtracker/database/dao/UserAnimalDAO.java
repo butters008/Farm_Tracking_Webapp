@@ -11,11 +11,6 @@ import java.util.List;
 
 @Repository
 public interface UserAnimalDAO extends JpaRepository<UserAnimal, Long> {
-
-
     List<UserAnimal> findByUserId(@Param("userId") User user);
-
     UserAnimal findByAnimalId(@Param("animalId") Animal animal);
-
-
 }

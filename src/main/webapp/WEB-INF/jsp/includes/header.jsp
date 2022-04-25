@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../pub/css/BaseStyle.css">
     <link rel="stylesheet" href="../pub/css/gridStyle.css">
     <link rel="stylesheet" href="../pub/css/AnimalStyle.css">
+    <link rel="stylesheet" href="../pub/css/UserStyle.css">
     <script src="../pub/js/working.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js"
             integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
@@ -14,22 +15,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&family=Roboto:wght@500&display=swap"
           rel="stylesheet">
     <!--  Remaining head information  -->
-    <title>Title</title>
+    <title>Farm Management System</title>
 </head>
 <body>
 <div class="mainGridContainer">
     <header class="headerContent">
         <div id="siteLogo">
-            <img src="../pub/images/farmLogo.png" alt="farmlogo">
-            <span><strong>FMS</strong></span>
+            <img src="../pub/images/farmLogo.png" alt="farmlogo" style="padding-bottom: 10px;">
+            <h1 style="padding-left: 25px;font-size: xxx-large;">FMS</h1>
         </div>
         <div id="headerSearch">
-            <input type="search" name="searchAnimal" id="searchAnimalId">
+
         </div>
         <div id="headerAccount">
-
+            <sec:authorize access="isAuthenticated()">
+                <img src="../pub/images/avatarIcon.svg" alt="farmlogo" style="max-width: 15%; border-radius: 35px">
+                <span style="padding-left: 15px; font-size: x-large"><strong><sec:authentication property="principal.username"/></strong></span>
+            </sec:authorize>
         </div>
-
 
     </header>
     <main class="mainContentContainer">
