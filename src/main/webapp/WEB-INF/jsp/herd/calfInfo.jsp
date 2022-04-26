@@ -6,17 +6,17 @@
 <c:if test="${not empty calf.id}">
 <form class="addCalfPage" action="/herd/UpdateCalf?calfId=${calf.id}" method="post">
     <div class="calfTitle">
-        <h2>Test Calf Exist</h2>
+        <h2>Update Calf Information</h2>
     </div>
 </c:if>
 <c:if test="${empty calf.id}">
 <form class="addCalfPage" action="/herd/addNewCalf" method="post">
     <div class="calfTitle">
-        <h2>Test Calf NEW CALF</h2>
+        <h2>Enter New Calf Information</h2>
     </div>
 </c:if>
     <div class="calfBasicInfo">
-        <h3>Basic Calf Information (required info)</h3>
+        <h3>Required Information</h3>
         <div class="calfIDS">
             <table>
                 <thead>

@@ -33,7 +33,7 @@
     <div class="aStatus">
         <label for="breed">Animal Breed</label><br>
         <input type="text" name="breed" id="breed" onfocusout="validateBreed()" value="${herd.breed}"><br>
-        <div id="errorBreed"></div><br><br>
+        <div id="errorBreed"></div>
 
         <label for="animalStatus">Animal Status</label><br>
         <div id="animalStatus">
