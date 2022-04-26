@@ -1,5 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--<%@include file="../../../pub/html/header.html" %>--%>
 <jsp:include page="../includes/header.jsp"/>
 <section id="mainContent">
 <div id="herdListPage">
@@ -22,7 +21,6 @@
                     <tr>
                         <td>
                             <a href="./herdinfo?cowId=${herdList.animalId.animalId1}"><button>Edit</button></a>&emsp;
-<%--                            <button style="background-color: var(--attentionColor)">Preview</button>--%>
                         </td>
                         <td>${herdList.animalId.animalId1}</td>
                         <td>${herdList.animalId.animalId2}</td>
@@ -34,19 +32,10 @@
         </table>
     </div>
     <div id="listFooter">
-        <button>next page</button>
     </div>
 </div>
-
-
-
 </section>
 <div id="sideContent">
-    <button>Add Cow</button><br>
-    <button>Add Bull</button><br>
-    <button>Add Calf</button><br>
 
 </div>
-
-<%--<%@include file="../../../pub/html/footer.html" %>--%>
 <jsp:include page="../includes/footer.jsp"/>

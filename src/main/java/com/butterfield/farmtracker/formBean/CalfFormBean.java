@@ -6,6 +6,7 @@ import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Getter
@@ -17,7 +18,6 @@ public class CalfFormBean {
     @NotBlank(message="Calf Id 1 - Required")
     private String calfId1;
 
-    @NotBlank(message="Calf Id 2 - Required")
     private String calfId2;
 
     @NotBlank(message="Calf Breed - Required")
@@ -26,10 +26,10 @@ public class CalfFormBean {
     @NotBlank(message="Calf Sex - Required")
     private String calfSex;
 
-//    @NotBlank(message="Birth Weight - Required")
+    @NotNull(message = "Need to have a Birth Weight")
     private Integer birthWeight;
 
-//    @NotBlank(message="Birthdate - Required")
+    @NotNull(message = "Need to have a Date-of-Birth")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfBirth;
 
@@ -37,8 +37,8 @@ public class CalfFormBean {
     private LocalDate dateOfDeath;
 
     private Integer weanWeight;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate weanDate;
 
     private String calfStatus;
@@ -46,10 +46,4 @@ public class CalfFormBean {
     //For the parents
     private String mother;
     private String father;
-
-
-
-
-
-
 }

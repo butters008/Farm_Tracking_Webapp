@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../includes/header.jsp"/>
-<section id="mainContent">
+<section id="mainContent" style="text-align: center;">
 <form id="addAnimalPage" name="herdForm"  action="/herd/updateAnimal/${herd.id}" method="post">
     <div class="aTitle">
         <h1>Animal Information</h1>
@@ -9,17 +9,16 @@
     <div class="aType">
         <div id="animalType">
             <h2>Animal Type</h2>
-            <select name="animalType">
+            <select name="animalType" class="herdDropDownInput" id="aTypeDropDown">
                 <option value="${herd.animalType}" selected>${herd.animalType}</option>
                 <option value="cow">Cow</option>
                 <option value="bull">Bull</option>
             </select>
-
         </div>
     </div>
 
     <div class="aPic">
-        srkfugjhb
+
     </div>
 
     <div class="aID">
@@ -34,18 +33,18 @@
     <div class="aStatus">
         <label for="breed">Animal Breed</label><br>
         <input type="text" name="breed" id="breed" onfocusout="validateBreed()" value="${herd.breed}"><br>
-        <div id="errorBreed"></div><br>
+        <div id="errorBreed"></div><br><br>
 
         <label for="animalStatus">Animal Status</label><br>
         <div id="animalStatus">
-            <select name="herdStatus">
+            <select name="herdStatus" class="herdDropDownInput">
                 <option value="${herd.herdStatus}" selected>${herd.herdStatus}</option>
                 <option value="Active">Active</option>
                 <option value="Sold">Sold</option>
                 <option value="Butchered">Butchered</option>
                 <option value="Dead">Dead</option>
             </select>
-        </div><br>
+        </div><br><br>
         <label for="boughtFrom">Bought From</label>
         <input type="text" name="boughtFrom" id="boughtFrom" value="${herd.boughtFrom}"><br>
     </div>

@@ -1,29 +1,57 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--<%@include file="../../pub/html/header.html" %>--%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <jsp:include page="includes/header.jsp"/>
 <section id="mainContent" >
-    <h1>Hello</h1>
-    <ul>
-        ${user}
-        <%--    <c:forEach items="${userList}" var="user">--%>
-        <%--        <li>${user.firstName}</li>--%>
-        <%--    </c:forEach>--%>
-    </ul>
-    <button onclick="working()">JavaScript Function</button>
-    <button onclick="working2()">JavaScript Function 2</button>
+    <sec:authorize access="!isAuthenticated()">
+        <div id="noIndex" style="text-align: center">
+            <h2>Welcome to Farm Management System</h2><br><br>
+            <p>If you would like to use FMS,<br> please sign in or create a new account</p>
+        </div>
+    </sec:authorize>
+    <sec:authorize access="isAuthenticated()">
+        <div id ="userIndex">
+            <div class="iTitle">
+                <h2>${user.lastName} Farm - Summary</h2>
+            </div>
+            <div class="iBull">
+                <h3>Bull Count</h3>
+                <div style="font-size: xx-large">${bullSize}</div>
+            </div>
+            <div class="iCow">
+                <h3>Cow Count</h3>
+                <div style="font-size: xx-large">${herdSize}</div>
+            </div>
+            <div class="iCalf">
+                <h3>Calf Count</h3>
+                <div style="font-size: xx-large">${calfSize}</div>
+            </div>
+            <div class="iBail">
+                <h3>Bail Count</h3>
+                <div style="font-size: xx-large">100</div>
+            </div>
+            <div class="dAvgC">
+                <div class="aGrowth">
+                    <h3>Daily Averages</h3>
+                </div>
+                <div class="aLbs">
+                    <h4>Growth</h4>
+                    <div>15.3 lbs</div>
+                </div>
+                <div class="aBail">
+                    <h4>Bails</h4>
+                    <div>1.4 Bails</div>
+                </div>
+                <div class="aCrop">
+                    <h4>Grain</h4>
+                    <div>15 lbs</div>
+                </div>
+            </div>
+        </div>
+    </sec:authorize>
 </section>
 <div id="sideContent">
-<%--    <button>Add Animal</button>--%>
 
 </div>
-
-<script>
-    function working(){
-        console.log("Inline JS worked");
-    }
-    window.onload = startFirst();
-</script>
-
 
 <jsp:include page="includes/footer.jsp"/>
 <%--<%@include file="../../pub/html/footer.html" %>--%>

@@ -21,7 +21,6 @@ import java.util.List;
 
 @Slf4j
 @Controller
-//@PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
 public class UserController {
 
     @Autowired
@@ -33,7 +32,6 @@ public class UserController {
     @Autowired
     private UserRoleDAO userRoleDAO;
 
-    //Need to have a simple get for the page to load
     @RequestMapping(value = "/user/register", method = RequestMethod.GET)
     public ModelAndView register() throws Exception {
         ModelAndView response = new ModelAndView();
@@ -42,19 +40,16 @@ public class UserController {
         return response;
     }
 
-
     @RequestMapping(value = "/user/login", method = RequestMethod.GET)
     public ModelAndView login() throws Exception {
         ModelAndView response = new ModelAndView();
         response.setViewName("user/login");
-
 
         return response;
     }
 
     @RequestMapping(value = "/user/registerSubmit", method = {RequestMethod.POST, RequestMethod.GET})
     public ModelAndView registerSubmit(@Valid RegisterFormBean bean, BindingResult bindingResult) throws Exception {
-
         ModelAndView response = new ModelAndView();
 
         //Annotation Error Handling
@@ -71,8 +66,6 @@ public class UserController {
             return response;
         }//End of Error handling
 
-        log.info(bean.toString());
-
         User user = new User();
         user.setEmail(bean.getEmail());
         user.setFirstName(bean.getFirstName());
@@ -80,8 +73,6 @@ public class UserController {
         String password = passwordEncoder.encode(bean.getPassword());
         user.setPassword(password);
 
-
-        //Saving user to DB
         userDAO.save(user);
 
         UserRole userRole = new UserRole();
@@ -92,30 +83,4 @@ public class UserController {
         response.setViewName("redirect:/index");
         return response;
     }
-
-    /*
-    * TODO: This method will be revamped for profile page on updating
-    *  user information. Some info will probably be left as unchangeable.
-    * */
-//    @GetMapping(value = "/user/edit/{userId}")
-//    public ModelAndView editUser(@PathVariable("userId") Integer userId) throws Exception {
-//        ModelAndView response = new ModelAndView();
-//        response.setViewName("user/register");
-//
-//        User user = userDAO.findById(userId);
-//
-//        RegisterFormBean form = new RegisterFormBean();
-//
-//        form.setId(user.getId());
-//        form.setEmail(user.getEmail());
-//        form.setFirstName(user.getFirstName());
-//        form.setLastName(user.getLastName());
-//        form.setPassword(user.getPassword());
-//        form.setPasswordConfirm(user.getPassword());
-//
-//        response.addObject("form", form);
-//
-//        return response;
-//    }
-
 }

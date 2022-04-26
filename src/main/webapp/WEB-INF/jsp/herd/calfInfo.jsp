@@ -3,13 +3,13 @@
 <jsp:include page="../includes/header.jsp"/>
 <section id="mainContent">
 <%--    ${calf}--%>
-<c:if test="${not empty calf}">
+<c:if test="${not empty calf.id}">
 <form class="addCalfPage" action="/herd/UpdateCalf?calfId=${calf.id}" method="post">
     <div class="calfTitle">
         <h2>Test Calf Exist</h2>
     </div>
 </c:if>
-<c:if test="${empty calf}">
+<c:if test="${empty calf.id}">
 <form class="addCalfPage" action="/herd/addNewCalf" method="post">
     <div class="calfTitle">
         <h2>Test Calf NEW CALF</h2>
@@ -28,20 +28,27 @@
                 <tbody>
                     <tr>
                         <td><input type="text" name="calfId1" id="calfId1" value="${calf.calfId1}"></td>
-                        <c:forEach items='${bindingResult.getFieldErrors("calfId1")}' var="error">
-                            <div style="color: red;">${error.getDefaultMessage()}</div>
-                        </c:forEach>
+
                         <td><input type="text" name="calfId2" id="calfId2" value="${calf.calfId2}"></td>
                     </tr>
+
+                    <c:forEach items='${bindingResult.getFieldErrors("calfId1")}' var="error">
+                    <tr>
+                        <td><div style="color: red;">${error.getDefaultMessage()}</div></td>
+                    </tr>
+                    </c:forEach>
                     <tr>
                         <td><label for="breed">Breed</label></td>
                     </tr>
                     <tr>
                         <td><input type="text" name="breed" id="breed" value="${calf.breed}"></td>
-                        <c:forEach items='${bindingResult.getFieldErrors("breed")}' var="error">
-                            <div style="color: red;">${error.getDefaultMessage()}</div>
-                        </c:forEach>
+
                     </tr>
+                    <c:forEach items='${bindingResult.getFieldErrors("breed")}' var="error">
+                    <tr>
+                        <td><div style="color: red;">${error.getDefaultMessage()}</div></td>
+                    </tr>
+                    </c:forEach>
                 </tbody>
             </table>
 
@@ -50,7 +57,7 @@
 
         <%-- For right now, we are going to do two different inputs --%>
         <c:if test="${not empty calf}">
-            <select id="mother" name="calfSex" value="${parentCalf.calf}">
+            <select id="mother" name="calfSex" value="${parentCalf.calf}" class="herdDropDownInput" id="calfDropDown">
                 <option value="${calf.calfSex}" selected>${calf.calfSex}</option>
                 <option value="MALE" >Male</option>
                 <option value="FEMALE" >Female</option>
@@ -71,7 +78,7 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td><input type="radio" name="calfSex" value="MALE"></td>
+                        <td><input type="radio" name="calfSex" value="MALE" checked></td>
                         <td><input type="radio" name="calfSex" value="FEMALE"></td>
                     </tr>
                     </tbody>
@@ -117,6 +124,16 @@
                         </select>
                     </td>
                 </tr>
+                <c:forEach items='${bindingResult.getFieldErrors("birthWeight")}' var="error">
+                    <tr>
+                        <td><div style="color: red;">${error.getDefaultMessage()}</div></td>
+                    </tr>
+                </c:forEach>
+                <c:forEach items='${bindingResult.getFieldErrors("dateOfBirth")}' var="error">
+                    <tr>
+                        <td><div style="color: red;">${error.getDefaultMessage()}</div></td>
+                    </tr>
+                </c:forEach>
                 </tbody>
             </table>
         </div><br><br><br><br>
@@ -143,24 +160,7 @@
 </form>
 </section>
 <div id="sideContent">
-    <h3>Optional Information</h3>
-    <table>
-        <thead>
-        <tr>
-            <th>Relative</th>
-            <th>Info Title</th>
-            <th>Info input</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td><input type="checkbox" value="null"></td>
-            <td><label for="dateOfDeath">DoD</label></td>
-            <td><input type="date" id="dateOfDeath"></td>
-        </tr>
 
-        </tbody>
-    </table>
 
 </div>
 

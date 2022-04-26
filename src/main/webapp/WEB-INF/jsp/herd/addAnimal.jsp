@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../includes/header.jsp"/>
 <section id="mainContent">
-<form id="addAnimalPage"  action="/herd/submitAnimal" method="post">
+<form id="addAnimalPage"  action="/herd/submitAnimal" method="post" enctype="multipart/form-data">
     <div class="aTitle">
         <input type="hidden" name="id" value="${form.id}">
         <h1>Add Parent to Herd</h1>
@@ -25,7 +25,6 @@
     </div>
 
     <div class="aPic">
-        srkfugjhb
     </div>
 
     <div class="aID">
@@ -43,7 +42,7 @@
         <label for="breed">Animal Breed</label><br>
         <input type="text" name="breed" id="breed" onfocusout="validateBreed()"><br>
         <div id="errorBreed"></div><br>
-        <label for="animalStatus">Animal Type</label><br>
+        <label for="animalStatus">Animal Status</label><br>
         <div id="animalStatus">
             Active<input type="radio" name="herdStatus" value="Active" checked>
             Sold<input type="radio" name="herdStatus" value="Sold">

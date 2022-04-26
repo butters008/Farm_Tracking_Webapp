@@ -1,0 +1,144 @@
+.iTitle{
+    grid-area: iTitle;
+    /*background-color: #a46c02;*/
+    text-align: center;
+    font-size: x-large;
+}
+.iBull{
+    grid-area: iBull;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.iBull h3{
+    font-size: xx-large;
+    background-color: rgba(105, 105, 105, 0.47);
+    border-radius: 15px;
+    padding: 15px;
+}
+
+.iCow{
+    grid-area: iCow;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.iCow h3{
+    font-size: xx-large;
+    background-color: rgba(105, 105, 105, 0.47);
+    border-radius: 15px;
+    padding: 15px;
+}
+.iCalf{
+    grid-area: iCalf;
+    display: flex;
+    flex-direction: column;
+    text-align: center;}
+
+.iCalf h3{
+    font-size: xx-large;
+    background-color: rgba(105, 105, 105, 0.47);
+    border-radius: 15px;
+    padding: 15px;
+}
+
+.iBail{
+    grid-area: iBail;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.iBail h3{
+    font-size: xx-large;
+    background-color: rgba(105, 105, 105, 0.47);
+    border-radius: 15px;
+    padding: 15px;
+}
+
+.dAvgC{
+    grid-area: dAvgC;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: .75fr 3.5fr;
+    grid-template-areas:
+        "aGrowth aGrowth aGrowth"
+        "aLbs aBail aCrop";
+    column-gap: 1em;
+    row-gap: 0;
+}
+
+.aGrowth{
+    grid-area: aGrowth;
+    display: flex;
+    /*flex-direction: column;*/
+    text-align: center;
+    justify-content: space-around;
+    align-items: center;
+    height: 7vh;
+    /*background-color: #00850b;*/
+}
+
+.aGrowth h3{
+    font-size: xx-large;
+}
+
+.aGrowth div{
+    font-size: xx-large;
+}
+
+.aBail{
+    grid-area: aBail;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.aCrop{
+    grid-area: aCrop;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.aLbs{
+    grid-area: aLbs;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+}
+
+.aLbs h4{
+    font-size: x-large;
+    padding: 5px;
+    background-color: rgba(105, 105, 105, 0.47);
+    border-radius: 15px;
+}
+
+.aLbs div{
+    font-size: x-large;
+}
+
+.aBail h4{
+    font-size: x-large;
+    padding: 5px;
+    background-color: rgba(105, 105, 105, 0.47);
+    border-radius: 15px;
+}
+
+.aBail div{
+    font-size: x-large;
+}
+
+.aCrop h4{
+    font-size: x-large;
+    padding: 5px;
+    background-color: rgba(105, 105, 105, 0.47);
+    border-radius: 15px;
+}
+
+.aCrop div{
+    font-size: x-large;
+}

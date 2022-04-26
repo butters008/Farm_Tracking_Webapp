@@ -12,7 +12,6 @@ import java.time.LocalDate;
 @Setter
 @ToString
 public class HerdFormBean {
-    //This will be hidden on page if needed
     private Integer id;
 
     @NotBlank(message="Animal Id 1 - Required")
@@ -39,5 +38,7 @@ public class HerdFormBean {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate boughtDate;
+
+    private LocalDate animalImage;
 
 }

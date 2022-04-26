@@ -9,6 +9,7 @@ import com.butterfield.farmtracker.formBean.HerdFormBean;
 import com.butterfield.farmtracker.security.SecurityService;
 import com.butterfield.farmtracker.service.HerdService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -16,9 +17,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.io.File;
+//import org.apache.commons.io.FileUtils;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,10 +67,20 @@ public class HerdController {
 
     //For right now I am going to hard code in list of cows
     @RequestMapping(value = "/herd/herdinfo", method = RequestMethod.GET)
-    public ModelAndView getCowsById1(@RequestParam("cowId") String cowId) throws Exception {
+    public ModelAndView getCowsById1(@RequestParam("cowId") String cowId, @RequestParam(value = "file", required = false) MultipartFile file) throws Exception {
         ModelAndView response = new ModelAndView();
 
-        Animal animal = herdDAO.findByAnimalId1(cowId);
+        //Incase there are two animals with the same first ID belonging to different users
+        User user = securityService.getLoggedInUser();
+        Animal animal = new Animal();
+        List<UserAnimal> animals = userAnimalDAO.findByUserId(user);
+        for (UserAnimal userAnimal: animals) {
+                if(userAnimal.getAnimalId().getAnimalId1().equals(cowId)){
+                    animal = userAnimal.getAnimalId();
+                log.info(animal.toString());
+                }
+        }
+
         List<ParentCalf> parentCalves = parentCalfDAO.findAllByCowId(animal.getId());
         log.info(parentCalves.toString());
 
@@ -86,17 +101,15 @@ public class HerdController {
         return response;
     }
 
+    //Adding animal to the DB
     @RequestMapping(value = "/herd/submitAnimal", method = RequestMethod.POST)
     public ModelAndView submitAnimal(
-            @Valid HerdFormBean form,
-            @RequestParam("dateOfBirth") String dob,
-            @RequestParam("dateOfDeath") String dod,
-            @RequestParam("boughtDate") String bDate,
-            BindingResult bindingResult) throws Exception {
+            @Valid HerdFormBean form) throws Exception {
         ModelAndView response = new ModelAndView();
 
         //Getting the info of the user that logged in
         User userLoggedIn = securityService.getLoggedInUser();
+        log.info(form.toString());
 
         //And extra check to make sure no one is bypassing login
         if (userLoggedIn == null) {
@@ -106,7 +119,15 @@ public class HerdController {
             //Creating the animal object
             Animal animal = new Animal();
 
-            animal =animalObjectInfo(form, dob, dod, bDate, animal, herdService);
+            animal.setAnimalId1(form.getAnimalId1());
+            animal.setAnimalId2(form.getAnimalId2());
+            animal.setAnimalType(form.getAnimalType());
+            animal.setBreed(form.getBreed());
+            animal.setHerdStatus(form.getHerdStatus());
+            animal.setBoughtFrom(form.getBoughtFrom());
+            animal.setDateOfBirth(form.getDateOfBirth());
+            animal.setDateOfDeath(form.getDateOfDeath());
+            animal.setBoughtDate(form.getBoughtDate());
 
             //Saving the animal to the DB
             herdDAO.save(animal);
@@ -146,8 +167,6 @@ public class HerdController {
             log.info("Form Bean" + form.toString());
             response.addObject("bindingResult", bindingResult);
             response.addObject("herd", form);
-//            response.setViewName("redirect:/herd/herdinfo?cowId= " + form.getAnimalId1() + "");
-//            response.
             response.setViewName("herd/herdinfo");
             return response;
         }//End of error handing
