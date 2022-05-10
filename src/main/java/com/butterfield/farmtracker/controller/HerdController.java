@@ -7,6 +7,7 @@ import com.butterfield.farmtracker.database.entity.User;
 import com.butterfield.farmtracker.database.entity.UserAnimal;
 import com.butterfield.farmtracker.formBean.HerdFormBean;
 import com.butterfield.farmtracker.security.SecurityService;
+import com.butterfield.farmtracker.service.ErrorService;
 import com.butterfield.farmtracker.service.HerdService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
@@ -53,6 +54,23 @@ public class HerdController {
     @Autowired
     private HerdService herdService = new HerdService();
 
+    @Autowired
+    private ErrorService errorService = new ErrorService();
+
+
+    /*
+    * TODO: Cow Revamp
+    *  1) Complete Error Binding for ADDING and EDITING Animal
+    *  2) Refactor and extract methods when needed for ADDING and EDITING
+    *  3) Clean up code
+    *  4) Add comments
+    *  5) Add picture for Animal
+    *  6) Refactor List
+    *    - Have it filter Cows, Bulls, and Calves
+    *    - Have it filter by Calf and DOB (year and/or month)
+    *  7) Put all methods that are not in controllers, into service class
+    * */
+
 
     @RequestMapping(value = "/herd/list", method = RequestMethod.GET)
     public ModelAndView listAllCows() throws Exception {
@@ -97,19 +115,32 @@ public class HerdController {
     public ModelAndView addAnimalInital() throws Exception {
         ModelAndView response = new ModelAndView();
 
-        response.setViewName("herd/addAnimal");
+        response.setViewName("herd/herdinfo");
         return response;
     }
 
     //Adding animal to the DB
     @RequestMapping(value = "/herd/submitAnimal", method = RequestMethod.POST)
-    public ModelAndView submitAnimal(
-            @Valid HerdFormBean form) throws Exception {
+    public ModelAndView submitAnimal(@Valid HerdFormBean form, BindingResult bindingResult) throws Exception {
         ModelAndView response = new ModelAndView();
 
         //Getting the info of the user that logged in
         User userLoggedIn = securityService.getLoggedInUser();
-        log.info(form.toString());
+
+        if(bindingResult.hasErrors()){
+            log.info("We are inside the funtion");
+
+            List<String> errorMessages = new ArrayList<>();
+
+            for (ObjectError error : bindingResult.getAllErrors()) {
+                errorMessages.add(error.getDefaultMessage());
+            }
+
+            response.addObject("bindingResult", bindingResult);
+            response.addObject("herd", form);
+            response.setViewName("herd/herdinfo");
+            return response;
+        }//End of error handing
 
         //And extra check to make sure no one is bypassing login
         if (userLoggedIn == null) {
@@ -117,29 +148,16 @@ public class HerdController {
         }
         else{
             //Creating the animal object
-            Animal animal = new Animal();
-
-            animal.setAnimalId1(form.getAnimalId1());
-            animal.setAnimalId2(form.getAnimalId2());
-            animal.setAnimalType(form.getAnimalType());
-            animal.setBreed(form.getBreed());
-            animal.setHerdStatus(form.getHerdStatus());
-            animal.setBoughtFrom(form.getBoughtFrom());
-            animal.setDateOfBirth(form.getDateOfBirth());
-            animal.setDateOfDeath(form.getDateOfDeath());
-            animal.setBoughtDate(form.getBoughtDate());
+            Animal animal = herdService.addAnimalToDB(form);
 
             //Saving the animal to the DB
             herdDAO.save(animal);
 
             //Creating a new userAnimal and submitting this to DB
-            UserAnimal userAnimal = new UserAnimal();
-
-            userAnimal.setUserId(userLoggedIn);
-            userAnimal.setAnimalId(animal);
+            UserAnimal userAnimal = new UserAnimal(userLoggedIn,animal);
 
             userAnimalDAO.save(userAnimal);
-            response.setViewName("herd/addAnimal");
+            response.setViewName("herd/herdinfo");
 
         }
         return response;
@@ -156,16 +174,10 @@ public class HerdController {
 
         if(bindingResult.hasErrors()){
             log.info("We are inside the funtion");
-            List<String> errorMessages = new ArrayList<>();
 
-            for (ObjectError error : bindingResult.getAllErrors()) {
-                errorMessages.add(error.getDefaultMessage());
-                log.info(((FieldError) error).getField() + " " + error.getDefaultMessage());
-            }
+            List errorList = errorService.errorList(bindingResult);
 
-            log.info(errorMessages.toString());
-            log.info("Form Bean" + form.toString());
-            response.addObject("bindingResult", bindingResult);
+            response.addObject("bindingResult", errorList);
             response.addObject("herd", form);
             response.setViewName("herd/herdinfo");
             return response;

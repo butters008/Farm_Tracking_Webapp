@@ -180,13 +180,6 @@ public class CalfController {
             return response;
         }//End of Error handling
 
-        //Logged form bean to make sure data is coming over
-        log.info(form.toString());
-
-        //Logging to make sure that I am getting the Cow and Bull Object
-        log.info(cow.toString());
-        log.info(bull.toString());
-
         //Filling the calf object
         calf.setCalfId1(form.getCalfId1());
         calf.setCalfId2(form.getCalfId2());

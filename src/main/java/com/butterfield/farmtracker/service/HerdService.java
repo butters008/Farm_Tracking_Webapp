@@ -4,9 +4,11 @@ import com.butterfield.farmtracker.database.dao.HerdDAO;
 import com.butterfield.farmtracker.database.dao.UserAnimalDAO;
 import com.butterfield.farmtracker.database.entity.Animal;
 import com.butterfield.farmtracker.database.entity.UserAnimal;
+import com.butterfield.farmtracker.formBean.HerdFormBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +45,6 @@ public class HerdService {
         List<Animal> cows = new ArrayList<>();
         userAnimals.forEach( (userAnimal -> {
             if(userAnimal.getAnimalId().getAnimalType().equals("cow")){
-//            Animal cow = userAnimal.findById(userAnimal.getAnimalId().getId());
             cows.add(userAnimal.getAnimalId());
         }}));
         return cows;
@@ -53,9 +54,22 @@ public class HerdService {
         List<Animal> bulls = new ArrayList<>();
         userAnimals.forEach( (userAnimal -> {
             if(userAnimal.getAnimalId().getAnimalType().equals("bull")){
-//            Animal cow = userAnimal.findById(userAnimal.getAnimalId().getId());
                 bulls.add(userAnimal.getAnimalId());
             }}));
         return bulls;
+    }
+
+    public Animal addAnimalToDB(@Valid HerdFormBean form){
+        Animal animal = new Animal();
+        animal.setAnimalId1(form.getAnimalId1());
+        animal.setAnimalId2(form.getAnimalId2());
+        animal.setAnimalType(form.getAnimalType());
+        animal.setBreed(form.getBreed());
+        animal.setHerdStatus(form.getHerdStatus());
+        animal.setBoughtFrom(form.getBoughtFrom());
+        animal.setDateOfBirth(form.getDateOfBirth());
+        animal.setDateOfDeath(form.getDateOfDeath());
+        animal.setBoughtDate(form.getBoughtDate());
+        return animal;
     }
 }

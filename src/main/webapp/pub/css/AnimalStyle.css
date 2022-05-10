@@ -7,14 +7,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: blueviolet;
 }
 
 .aType{
     grid-area: aType;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*align-items: center;*/
+    /*justify-content: center;*/
+    background-color: var(--secondaryColor);
 }
 
 .aType #animalType h2{
@@ -35,14 +37,16 @@
 
 .aPic{
     grid-area: aPic;
+    background-color: firebrick;
 }
 
 .aID{
     grid-area: aID;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
+    /*display: flex;*/
+    /*justify-content: center;*/
+    /*flex-direction: column;*/
+    /*align-items: center;*/
+    background-color: #a46c02;
 }
 
 .aID input{
@@ -55,6 +59,7 @@
     justify-content: center;
     flex-direction: column;
     text-align: center;
+    background-color: #00850b;
 }
 
 .aStatus #boughtFrom{
@@ -69,9 +74,10 @@
 
 .aDates{
     grid-area: aDates;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+    /*display: flex;*/
+    /*justify-content: space-around;*/
+    /*align-items: center;*/
+    background-color: cadetblue;
 }
 
 .naturalDate{
@@ -296,4 +302,14 @@
 
 #calfDropDown{
     width: 60%;
+}
+
+.herdTableForm{
+    margin: auto;
+}
+
+.herdTableForm input{
+    width: 85%;
+    text-align: center;
+    border-radius: 5px;
 }
