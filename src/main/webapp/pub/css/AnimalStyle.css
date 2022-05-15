@@ -205,7 +205,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 45vw;
+    /*width: 45vw;*/
+    background-color: cadetblue;
 }
 
 .calfBasicInfo table {
@@ -229,13 +230,7 @@
 
 .calfImage{
     grid-area: calfImages;
-    width: 1vw;
-}
-
-.calfExtraInfo{
-    grid-area: calfExtraInfo;
-    width: 1vw;
-
+    background-color: #a46c02;
 }
 
 .calfSubmit{
@@ -258,9 +253,11 @@
 }
 
 .calfExtraInfo {
+    grid-area: calfExtraInfo;
     display: flex;
     flex-direction: column;
     text-align: center;
+    background-color: #00850b;
 }
 
 .calfExtraInfo input{

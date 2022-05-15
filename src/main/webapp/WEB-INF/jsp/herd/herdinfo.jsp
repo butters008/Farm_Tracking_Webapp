@@ -4,11 +4,11 @@
 <section id="mainContent" style="text-align: center;">
 <%--This is for a editing any parent in herd--%>
 <c:if test="${not empty herd.id}">
-<form id="addAnimalPage" name="herdForm"  action="/herd/updateAnimal/${herd.id}" method="post">
+<form id="addAnimalPage" name="herdForm"  action="/herd/updateAnimal/${herd.id}" enctype="multipart/form-data" method="post">
 </c:if>
 <%--This is for adding a parent in the herd--%>
 <c:if test="${empty herd.id}">
-<form id="addAnimalPage" name="herdForm"  action="/herd/submitAnimal" method="post">
+<form id="addAnimalPage" name="herdForm"  action="/herd/submitAnimal" enctype="multipart/form-data" method="post" >
 </c:if>
     <div class="aTitle">
         <h1>Animal Information</h1>
@@ -37,7 +37,7 @@
                     </select>
                 </td>
                 <td>
-                    <input type="text" id="BornAndRaised" placeholder="Required if Kept">
+                    <input type="text" id="BornAndRaised" placeholder="NOT FUNCTIONAL YET" disabled>
                 </td>
             </tr>
             </tbody>
@@ -47,7 +47,7 @@
 
     <div class="aPic">
         <table class="herdTableForm">
-            <tr><h3>Herd Other Information</h3></tr>
+            <tr><h3>Purchase Information</h3></tr>
             <tr>
                 <td><label for="boughtFrom">Bought From</label></td>
                 <td><label for="boughtDate">Date Bought</label></td>
@@ -107,11 +107,15 @@
 
     <!-- This is going to be used for holding the PICTURE of the cow -->
     <div class="aStatus">
-        <c:if test="${not empty herd.id}">
-
-        </c:if>
         <c:if test="${empty herd.id}">
-
+            <div style="text-align: center;">
+                <label>Upload Picture: </label><br><br>
+                <input type="file" name="animalImage"><br>
+            </div>
+         </c:if>
+        <c:if test="${not empty herd.id}">
+            <img src="d:/pics/${herd.animalImage}}">
+            <input type="file" name="animalImage"><br>
         </c:if>
     </div>
 

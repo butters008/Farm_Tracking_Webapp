@@ -121,7 +121,10 @@ public class HerdController {
 
     //Adding animal to the DB
     @RequestMapping(value = "/herd/submitAnimal", method = RequestMethod.POST)
-    public ModelAndView submitAnimal(@Valid HerdFormBean form, BindingResult bindingResult) throws Exception {
+    public ModelAndView submitAnimal(@Valid HerdFormBean form,
+                                     BindingResult bindingResult,
+                                     @RequestParam(value="herdPic", required = false) MultipartFile file
+    ) throws Exception {
         ModelAndView response = new ModelAndView();
 
         //Getting the info of the user that logged in
@@ -149,6 +152,13 @@ public class HerdController {
         else{
             //Creating the animal object
             Animal animal = herdService.addAnimalToDB(form);
+            animal.setAnimalImage(form.getAnimalImage());
+
+            if(form.getAnimalImage().equals(null)){
+                File targetFile = new File("d:/pics/" + file.getOriginalFilename());
+                FileUtils.copyInputStreamToFile(file.getInputStream(), targetFile);
+            }
+
 
             //Saving the animal to the DB
             herdDAO.save(animal);
@@ -167,7 +177,8 @@ public class HerdController {
     public ModelAndView updateAnimal( @PathVariable("aID") Integer aID,
             @Valid HerdFormBean form, BindingResult bindingResult,
             @RequestParam("dateOfBirth") String dob, @RequestParam("dateOfDeath") String dod,
-            @RequestParam("boughtDate") String bDate) throws Exception {
+            @RequestParam("boughtDate") String bDate, @RequestParam(value="animalImage", required = false) MultipartFile file
+    ) throws Exception {
         log.info("Before response");
         ModelAndView response = new ModelAndView();
         log.info("Form bean brought in" + form.toString());
@@ -185,6 +196,25 @@ public class HerdController {
 
         Animal animal = herdDAO.findById(aID);
         animal = animalObjectInfo(form, dob, dod, bDate, animal, herdService);
+        try{
+            if(animal.getAnimalImage() == null){
+                log.debug("FORM BEAN: " + form.getAnimalImage());
+                log.debug("FILE INFO: " + file.getOriginalFilename());
+                log.debug("File Information: " + file.getOriginalFilename() + " " + file.getSize());
+
+                File targetFile = new File("D:/pics/" + file.getOriginalFilename());
+                FileUtils.copyInputStreamToFile(file.getInputStream(), targetFile);
+
+            }
+            else if(animal.getAnimalImage() != null){
+                //File targetFile = ;
+            }
+        }
+        catch(Exception e){
+            log.debug("Expection Thrown: ==> " + e);
+        }
+
+        animal.setAnimalImage(form.getAnimalImage());
         herdDAO.save(animal);
         response.setViewName("redirect:/herd/list");
         return response;
