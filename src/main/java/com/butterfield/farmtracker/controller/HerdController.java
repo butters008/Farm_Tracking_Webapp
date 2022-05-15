@@ -71,7 +71,15 @@ public class HerdController {
     *  7) Put all methods that are not in controllers, into service class
     * */
 
+    //The initial get for addAnimal jsp page
+    @RequestMapping(value = "/herd/addAnimal", method = RequestMethod.GET)
+    public ModelAndView addAnimalInital() throws Exception {
+        ModelAndView response = new ModelAndView();
+        response.setViewName("herd/herdinfo");
+        return response;
+    }
 
+    //This is for the page where it lists all the animals
     @RequestMapping(value = "/herd/list", method = RequestMethod.GET)
     public ModelAndView listAllCows() throws Exception {
         ModelAndView response = new ModelAndView();
@@ -83,7 +91,7 @@ public class HerdController {
         return response;
     }
 
-    //For right now I am going to hard code in list of cows
+    //Displays the cow's information on the page when clicked from list
     @RequestMapping(value = "/herd/herdinfo", method = RequestMethod.GET)
     public ModelAndView getCowsById1(@RequestParam("cowId") String cowId, @RequestParam(value = "file", required = false) MultipartFile file) throws Exception {
         ModelAndView response = new ModelAndView();
@@ -103,23 +111,15 @@ public class HerdController {
         log.info(parentCalves.toString());
 
         response.addObject("calves", parentCalves);
-
-        response.setViewName("herd/herdinfo");
         response.addObject("herd", animal);
-        return response;
-
-    }
-
-    //The initial get for addAnimal jsp page
-    @RequestMapping(value = "/herd/addAnimal", method = RequestMethod.GET)
-    public ModelAndView addAnimalInital() throws Exception {
-        ModelAndView response = new ModelAndView();
-
         response.setViewName("herd/herdinfo");
         return response;
+
     }
 
-    //Adding animal to the DB
+
+
+    //Adding new animal to the DB
     @RequestMapping(value = "/herd/submitAnimal", method = RequestMethod.POST)
     public ModelAndView submitAnimal(@Valid HerdFormBean form,
                                      BindingResult bindingResult,
@@ -158,7 +158,6 @@ public class HerdController {
                 File targetFile = new File("d:/pics/" + file.getOriginalFilename());
                 FileUtils.copyInputStreamToFile(file.getInputStream(), targetFile);
             }
-
 
             //Saving the animal to the DB
             herdDAO.save(animal);
