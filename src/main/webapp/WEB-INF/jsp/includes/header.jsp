@@ -30,7 +30,8 @@
         <div id="headerAccount">
             <sec:authorize access="isAuthenticated()">
                 <img src="../pub/images/avatarIcon.svg" alt="farmlogo" style="max-width: 15%; border-radius: 35px">
-                <span style="padding-left: 15px; font-size: x-large"><strong><sec:authentication property="principal.username"/></strong></span>
+                <span style="padding-left: 15px; font-size: x-large"><strong><sec:authentication
+                        property="principal.username"/></strong></span>
             </sec:authorize>
         </div>
 
@@ -49,7 +50,6 @@
                 </sec:authorize>
                 <sec:authorize access="!isAuthenticated()">
                     <li class="navButton account"><a href="../login/login">Login</a></li>
-                    <li class="navButton account"><a href="../user/register">Sign Up</a></li>
                 </sec:authorize>
                 <sec:authorize access="isAuthenticated()">
                     <li class="navButton account"><a href="../login/logout">Logout</a></li>

@@ -25,4 +25,12 @@ public class UserAnimal {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "animal_id")
     private Animal animalId;
+
+    public UserAnimal() {
+    }
+
+    public UserAnimal(User userId, Animal animalId) {
+        this.userId = userId;
+        this.animalId = animalId;
+    }
 }

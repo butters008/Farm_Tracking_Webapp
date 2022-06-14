@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -20,6 +21,7 @@ public class Animal {
     @Column(name = "id")
     private Integer id;
 
+    @NotEmpty(message = "Cannot be blank")
     @Column(name = "animal_id1")
     private String animalId1;
 
@@ -29,9 +31,11 @@ public class Animal {
     @Column(name = "animal_type")
     private String animalType;
 
+    @NotEmpty(message = "Cannot be blank")
     @Column(name = "breed")
     private String breed;
 
+    @NotEmpty(message = "Cannot be blank")
     @Column(name = "herd_status")
     private String herdStatus;
 

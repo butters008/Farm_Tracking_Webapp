@@ -6,31 +6,29 @@ const validateAnimalId1 = () => {
     let error = document.getElementById("errorAId1")
     const aId1 = document.getElementById("animalId1").value;
     console.log(aId1);
-    if(aId1.trim() == 0){
+    if (aId1.trim() === 0) {
         error.textContent = "Cannot be blank";
         error.style.color = "red";
         $button.prop('disabled', true);
-    }
-    else{
+    } else {
         error.textContent = "";
         $button.prop('disabled', false);
         return true;
     }
 }
 
-const validateBreed = () =>{
+const validateBreed = () => {
     //Define variables
     // let re = new RegExp("[^\\s*$]");
     let error = document.getElementById("errorBreed");
     let lName = document.getElementById("breed").value;
     // let result = re.test(breed);
 
-    if(lName.trim() == 0){
+    if (lName.trim() === 0) {
         error.textContent = "Cannot be blank";
         error.style.color = "red";
         $button.prop('disabled', true);
-    }
-    else{
+    } else {
         error.textContent = "";
         $button.prop('disabled', false);
         return true;
@@ -51,14 +49,15 @@ const validateAnimalType = () => {
 }
 
 const lastCheck = () => {
-    let check1 = validateAnimalId1();
-    let check2 = validateBreed();
+    const aId1 = document.getElementById("animalId1").value;
+    const breed = document.getElementById("breed").value;
 
-    if(check1 == true && check2 == true){
-        $button.prop('disabled', false);
-    }
-    else{
+    if (aId1.trim() === 0 || breed.trim() === 0) {
+        alert("No Information - Please fill out the form!")
         $button.prop('disabled', true);
+    } else {
+        alert("In the else")
+        $button.prop('disabled', false);
     }
 
 

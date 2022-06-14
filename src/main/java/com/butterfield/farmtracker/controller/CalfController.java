@@ -133,6 +133,8 @@ public class CalfController {
         calf.setCalfSex(form.getCalfSex());
         calf.setDateOfBirth(LocalDate.parse(dob));
         calf.setBirthWeight(form.getBirthWeight());
+        calf.setWeanWeight(form.getWeanWeight());
+        calf.setWeanDate(form.getWeanDate());
 
         calfDAO.save(calf);
 
@@ -148,7 +150,8 @@ public class CalfController {
     @RequestMapping(value = "/herd/addNewCalf", method = RequestMethod.POST)
     public ModelAndView addNewCalf(@Valid CalfFormBean form,
                                    BindingResult bindingResult,
-                                   @RequestParam("dateOfBirth") String dob) throws Exception {
+                                   @RequestParam("dateOfBirth") String dob,
+                                   @RequestParam(value="dateOfWean", required = false) String dow) throws Exception {
         ModelAndView response = new ModelAndView();
 
         //Making the objects
@@ -180,13 +183,6 @@ public class CalfController {
             return response;
         }//End of Error handling
 
-        //Logged form bean to make sure data is coming over
-        log.info(form.toString());
-
-        //Logging to make sure that I am getting the Cow and Bull Object
-        log.info(cow.toString());
-        log.info(bull.toString());
-
         //Filling the calf object
         calf.setCalfId1(form.getCalfId1());
         calf.setCalfId2(form.getCalfId2());
@@ -194,6 +190,8 @@ public class CalfController {
         calf.setBirthWeight(form.getBirthWeight());
         calf.setCalfSex(form.getCalfSex());
         calf.setBreed(form.getBreed());
+        calf.setWeanWeight(form.getWeanWeight());
+        calf.setWeanDate(form.getWeanDate());
 
         //Saving to DB
         calfDAO.save(calf);

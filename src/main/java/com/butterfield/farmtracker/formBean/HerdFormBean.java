@@ -39,6 +39,6 @@ public class HerdFormBean {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate boughtDate;
 
-    private LocalDate animalImage;
+    private String animalImage;
 
 }

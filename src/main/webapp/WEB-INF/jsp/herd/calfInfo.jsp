@@ -39,53 +39,41 @@
                     </c:forEach>
                     <tr>
                         <td><label for="breed">Breed</label></td>
+                        <td><label for="calfSex">Calf Sex</label></td>
                     </tr>
                     <tr>
                         <td><input type="text" name="breed" id="breed" value="${calf.breed}"></td>
-
+                        <td>
+                        <c:if test="${not empty calf}">
+                            <select id="calfSex" name="calfSex" value="${parentCalf.calf}" class="herdDropDownInput" id="calfDropDown">
+                                <option value="${calf.calfSex}" selected>${calf.calfSex}</option>
+                                <option value="MALE" >Male</option>
+                                <option value="FEMALE" >Female</option>
+                            </select>
+                        </c:if>
+                        <c:if test="${empty calf}">
+                            <select id="mother" name="calfSex" value="${parentCalf.calf}" class="herdDropDownInput" id="calfDropDown">
+                                <option value="MALE" selected>Male</option>
+                                <option value="FEMALE" >Female</option>
+                            </select>
+                        </c:if>
+                        </td>
                     </tr>
-                    <c:forEach items='${bindingResult.getFieldErrors("breed")}' var="error">
                     <tr>
-                        <td><div style="color: red;">${error.getDefaultMessage()}</div></td>
+                        <c:forEach items='${bindingResult.getFieldErrors("breed")}' var="error">
+                            <td><div style="color: red;">${error.getDefaultMessage()}</div></td>
+                        </c:forEach>
+
+                        <c:forEach items='${bindingResult.getFieldErrors("calfSex")}' var="error">
+                            <td><div style="color: red;">${error.getDefaultMessage()}</div></td>
+                        </c:forEach>
                     </tr>
-                    </c:forEach>
                 </tbody>
             </table>
-
         </div>
-        <label for="calfSex">Calf Sex</label>
+
 
         <%-- For right now, we are going to do two different inputs --%>
-        <c:if test="${not empty calf}">
-            <select id="mother" name="calfSex" value="${parentCalf.calf}" class="herdDropDownInput" id="calfDropDown">
-                <option value="${calf.calfSex}" selected>${calf.calfSex}</option>
-                <option value="MALE" >Male</option>
-                <option value="FEMALE" >Female</option>
-            </select>
-        </c:if>
-        <c:forEach items='${bindingResult.getFieldErrors("calfSex")}' var="error">
-            <div style="color: red;">${error.getDefaultMessage()}</div>
-        </c:forEach>
-        <%-- RADIO inputs for empty calf objects, easy value caption --%>
-        <c:if test="${empty calf}">
-            <div id="calfSex">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>Male</th>
-                        <th>Female</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td><input type="radio" name="calfSex" value="MALE" checked></td>
-                        <td><input type="radio" name="calfSex" value="FEMALE"></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </c:if>
-
         <div class="weightAndParents">
             <table>
                 <tbody>
@@ -140,10 +128,24 @@
 
     </div>
     <div class="calfImage">
-<%--        <button onclick="working2()" type="button">JavaScript Function 2</button>--%>
+        <button onclick="working2()" type="button">JavaScript Function 2</button>
     </div>
     <div class="calfExtraInfo">
-
+        <table>
+            <tbody style="text-align: center">
+                <tr>
+                    <td colspan="2"><h3>Additional Information</h3></td>
+                </tr>
+                <tr>
+                    <td><label>Wean Date</label></td>
+                    <td><label>Wean Weight</label></td>
+                </tr>
+                <tr>
+                    <td><input style="width: 90%;" type="date" name="weanDate" id="weanDate" value="${calf.weanDate}"></td>
+                    <td><input type="number" name="weanWeight" id="weanWeight" value="${calf.weanWeight}"></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
     <div class="calfSubmit">
         <c:if test="${empty calf}">
@@ -160,6 +162,12 @@
 </form>
 </section>
 <div id="sideContent">
+    <table style="margin: auto;">
+        <tbody style="text-align: center;">
+            <tr><td><h3>205 Avg</h3></td></tr>
+            <tr><td>Number go here</td></tr>
+        </tbody>
+    </table>
 
 
 </div>
