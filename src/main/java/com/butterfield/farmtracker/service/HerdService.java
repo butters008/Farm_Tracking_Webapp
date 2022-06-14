@@ -23,11 +23,10 @@ public class HerdService {
     private UserAnimalDAO userAnimalDAO;
 
     //This is to process dates and if a date comes in null, it gets sent back as null
-    public LocalDate processDates(String date){
-        if(date == null || date == ""){
+    public LocalDate processDates(String date) {
+        if (date == null || date == "") {
             return null;
-        }
-        else{
+        } else {
             LocalDate dateParsed = LocalDate.parse(date);
             return dateParsed;
         }
@@ -41,26 +40,33 @@ public class HerdService {
                 '}';
     }
 
-    public List<Animal> getUserHerdCowList(List<UserAnimal> userAnimals){
+    public List<Animal> getUserHerdCowList(List<UserAnimal> userAnimals) {
         List<Animal> cows = new ArrayList<>();
-        userAnimals.forEach( (userAnimal -> {
-            if(userAnimal.getAnimalId().getAnimalType().equals("cow")){
-            cows.add(userAnimal.getAnimalId());
-        }}));
+        userAnimals.forEach((userAnimal -> {
+            if (userAnimal.getAnimalId().getAnimalType().equals("cow")) {
+                cows.add(userAnimal.getAnimalId());
+            }
+        }));
         return cows;
     }
 
-    public List<Animal> getUserHerdBullList(List<UserAnimal> userAnimals){
+    public List<Animal> getUserHerdBullList(List<UserAnimal> userAnimals) {
         List<Animal> bulls = new ArrayList<>();
-        userAnimals.forEach( (userAnimal -> {
-            if(userAnimal.getAnimalId().getAnimalType().equals("bull")){
+        userAnimals.forEach((userAnimal -> {
+            if (userAnimal.getAnimalId().getAnimalType().equals("bull")) {
                 bulls.add(userAnimal.getAnimalId());
-            }}));
+            }
+        }));
         return bulls;
     }
 
-    public Animal addAnimalToDB(@Valid HerdFormBean form){
+    //This is function that will create and return an animal object
+    public Animal addAnimalToDB(@Valid HerdFormBean form) {
         Animal animal = new Animal();
+        if (form.getId() != null) {
+            animal.setId(form.getId());
+        }
+        animal.setAnimalId1(form.getAnimalId1());
         animal.setAnimalId1(form.getAnimalId1());
         animal.setAnimalId2(form.getAnimalId2());
         animal.setAnimalType(form.getAnimalType());

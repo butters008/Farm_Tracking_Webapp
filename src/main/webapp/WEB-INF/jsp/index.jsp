@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <jsp:include page="includes/header.jsp"/>
-<section id="mainContent" >
+<section id="mainContent">
     <sec:authorize access="!isAuthenticated()">
         <div id="noIndex" style="text-align: center">
             <h2>Welcome to Farm Management System</h2><br><br>
@@ -9,7 +9,7 @@
         </div>
     </sec:authorize>
     <sec:authorize access="isAuthenticated()">
-        <div id ="userIndex">
+        <div id="userIndex">
             <div class="iTitle">
                 <h2>${user.lastName} Farm - Summary</h2>
             </div>
@@ -25,27 +25,7 @@
                 <h3>Calf Count</h3>
                 <div style="font-size: xx-large">${calfSize}</div>
             </div>
-            <div class="iBail">
-                <h3>Bail Count</h3>
-                <div style="font-size: xx-large">100</div>
-            </div>
-            <div class="dAvgC">
-                <div class="aGrowth">
-                    <h3>Daily Averages</h3>
-                </div>
-                <div class="aLbs">
-                    <h4>Growth</h4>
-                    <div>15.3 lbs</div>
-                </div>
-                <div class="aBail">
-                    <h4>Bails</h4>
-                    <div>1.4 Bails</div>
-                </div>
-                <div class="aCrop">
-                    <h4>Grain</h4>
-                    <div>15 lbs</div>
-                </div>
-            </div>
+
         </div>
     </sec:authorize>
 </section>
