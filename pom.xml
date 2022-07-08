@@ -14,7 +14,7 @@
     <name>farmtracker</name>
     <description>Web app that helps user track and manage farm business</description>
     <properties>
-        <java.version>11</java.version>
+<!--         <java.version>11</java.version> -->
     </properties>
     <dependencies>
         <!--	Database	-->
