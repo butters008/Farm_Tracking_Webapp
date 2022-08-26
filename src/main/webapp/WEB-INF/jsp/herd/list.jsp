@@ -6,14 +6,16 @@
         <h2>Herd List</h2>
     </div>
     <div id="listTable">
-        <table id="herdList">
+<%--        <div>--%>
+<%--        <table id="herdList">--%>
+            <table>
             <thead>
                 <tr>
-                    <th id="headStart"></th>
-                    <th>Animal Id-1</th>
-                    <th>Animal Id-2</th>
-                    <th>Animal Type</th>
-                    <th id="End">Status</th>
+                    <td></td>
+                    <td>Primary Id</td>
+                    <td>Second Id</td>
+                    <td>Sex</td>
+                    <td>Status</td>
                 </tr>
             </thead>
             <tbody>
@@ -36,6 +38,25 @@
 </div>
 </section>
 <div id="sideContent">
-
+    <table id="calfList">
+        <thead>
+        <tr>
+            <th id="calfStart"></th>
+            <th>Calf Id-1</th>
+            <th>Sex</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach items="${calf}" var="calfList">
+            <tr>
+                <td>
+                    <a href="./calfUpdate?calfId=${calfList.calfId.id}"><button>Edit</button></a>&emsp;
+                </td>
+                <td>${calfList.calfId.calfId1}</td>
+                <td>${calfList.calfId.calfSex}</td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
 </div>
 <jsp:include page="../includes/footer.jsp"/>
