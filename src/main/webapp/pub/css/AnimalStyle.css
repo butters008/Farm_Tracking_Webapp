@@ -121,25 +121,29 @@
 #listTable{
     grid-area: listTable;
     display: flex;
-    justify-content: center;
+    /*width: 100%;*/
+    /*justify-content: space-evenly;*/
     background-color: #595959;
     color: var(--baseColor);
     border-radius: 15px;
 }
 
-#listTable table{
-    border-collapse: collapse;
+/*#listTable table{*/
+/*    border-collapse: collapse;*/
 
-}
+/*}*/
 
 #listTable table thead{
     background-color: var(--baseColor);
     height: 7vh;
     font-size: large;
-    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    /*width: 100%;*/
     color: var(--whiteText);
-    border: solid 2px black;
-    border-radius: 25px;
+    border-bottom: solid 2px black;
+    /*border-radius: 25px;*/
 }
 
 #listTable table button{
@@ -153,9 +157,9 @@
     background-color: var(--actionColor);
 }
 
-/*#listTable table thead tr{*/
+/*#listTable table thead th{*/
 /*    border-radius: 15px;*/
-
+/*    border-bottom-color: #1d1d1d;*/
 /*}*/
 
 #listTable a{
@@ -165,18 +169,25 @@
 #listFooter{
     grid-area: listFooter;
 }
-#listTable #herdList {
-    width: 40vw;
-}
+/*#listTable #herdList {*/
+/*    width: 40vw;*/
+/*}*/
 
-#listTable #herdList tr{
-    height: 2vh;
-    align-content: center;
-}
+/*#listTable #herdList tr{*/
+/*    height: 1vh;*/
+/*    align-content: center;*/
+/*}*/
 
-#listTable #herdList td{
-    padding: 5px;
-    text-align: center;
+/*#listTable #herdList td{*/
+/*    padding: 5px;*/
+/*    text-align: center;*/
+/*}*/
+
+#listPrintOut{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
 }
 
 .aSubmit #deleteBtn {

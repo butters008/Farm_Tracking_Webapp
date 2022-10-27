@@ -2,35 +2,36 @@
 <jsp:include page="../includes/header.jsp"/>
 <section id="mainContent">
 <div id="herdListPage">
-    <div id="listTitle">
-        <h2>Herd List</h2>
-    </div>
-    <div id="listTable">
-<%--        <div>--%>
-<%--        <table id="herdList">--%>
-            <table>
-            <thead>
-                <tr>
-                    <td></td>
-                    <td>Primary Id</td>
-                    <td>Second Id</td>
-                    <td>Sex</td>
-                    <td>Status</td>
+  <div id="listTitle">
+    <h2>Herd List</h2>
+  </div>
+  <div id="listTable">
+    <div>
+      <%-- <table id="herdList"> --%>
+      <table>
+        <thead>
+          <tr>
+            <td></td>
+            <td>Primary Id</td>
+            <td>Second Id</td>
+            <td>Sex</td>
+            <td>Status</td>
                 </tr>
             </thead>
-            <tbody>
-                <c:forEach items="${herd}" var="herdList">
-                    <tr>
-                        <td>
-                            <a href="./herdinfo?cowId=${herdList.animalId.animalId1}"><button>Edit</button></a>&emsp;
-                        </td>
-                        <td>${herdList.animalId.animalId1}</td>
-                        <td>${herdList.animalId.animalId2}</td>
-                        <td>${herdList.animalId.animalType}</td>
-                        <td>${herdList.animalId.herdStatus}</td>
-                    </tr>
-                </c:forEach>
-            </tbody>
+            <tbody id="listPrintOut">
+            <c:forEach items="${herd}" var="herdList">
+              <tr>
+                <td>
+                  <a href="./herdinfo?cowId=${herdList.animalId.animalId1}"><button>Edit</button></a>&emsp;
+                </td>
+                <td>${herdList.animalId.animalId1}</td>
+                <td>${herdList.animalId.animalId2}</td>
+                <td>${herdList.animalId.animalType}</td>
+                <td>${herdList.animalId.herdStatus}</td>
+              </tr>
+            </c:forEach>
+            <c:forEach></c:forEach>
+          </tbody>
         </table>
     </div>
     <div id="listFooter">
