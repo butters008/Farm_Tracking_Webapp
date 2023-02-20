@@ -51,8 +51,8 @@ public class Animal {
     @Column(name = "bought_date")
     private LocalDate boughtDate;
 
-    @Column(name = "animal_image")
-    private String animalImage;
+//    @Column(name = "animal_image")
+//    private String animalImage;
 
     @OneToMany(mappedBy = "cow", fetch = FetchType.LAZY)
     @ToString.Exclude

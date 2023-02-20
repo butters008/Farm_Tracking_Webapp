@@ -1,9 +1,6 @@
 package com.butterfield.farmtracker.controller;
 
-import com.butterfield.farmtracker.database.dao.CalfDAO;
-import com.butterfield.farmtracker.database.dao.HerdDAO;
-import com.butterfield.farmtracker.database.dao.ParentCalfDAO;
-import com.butterfield.farmtracker.database.dao.UserAnimalDAO;
+import com.butterfield.farmtracker.database.dao.*;
 import com.butterfield.farmtracker.database.entity.*;
 import com.butterfield.farmtracker.formBean.CalfFormBean;
 import com.butterfield.farmtracker.security.SecurityService;
@@ -39,6 +36,9 @@ public class CalfController {
 
     @Autowired
     private UserAnimalDAO userAnimalDAO;
+
+    @Autowired
+    private UserCalfDAO userCalfDAO;
 
     @Autowired
     private SecurityService securityService = new SecurityService();
@@ -92,11 +92,13 @@ public class CalfController {
         return response;
     }
 
+    //When I am making a save to the calf object, I than call this method.
     @RequestMapping(value = "/herd/UpdateCalf", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView updateCalf(@RequestParam("calfId") String calfId,
                                    @Valid CalfFormBean form,
-                                   BindingResult bindingResult,
-                                   @RequestParam("dateOfBirth") String dob) throws Exception {
+                                   BindingResult bindingResult
+//                                   @RequestParam("dateOfBirth") String dob
+    ) throws Exception {
         ModelAndView response = new ModelAndView();
 
         if (bindingResult.hasErrors()) {
@@ -131,7 +133,8 @@ public class CalfController {
         calf.setCalfId2(form.getCalfId2());
         calf.setBreed(form.getBreed());
         calf.setCalfSex(form.getCalfSex());
-        calf.setDateOfBirth(LocalDate.parse(dob));
+//        calf.setDateOfBirth(LocalDate.parse(dob));
+        calf.setDateOfBirth(form.getDateOfBirth());
         calf.setBirthWeight(form.getBirthWeight());
         calf.setWeanWeight(form.getWeanWeight());
         calf.setWeanDate(form.getWeanDate());
@@ -150,7 +153,7 @@ public class CalfController {
     @RequestMapping(value = "/herd/addNewCalf", method = RequestMethod.POST)
     public ModelAndView addNewCalf(@Valid CalfFormBean form,
                                    BindingResult bindingResult,
-                                   @RequestParam("dateOfBirth") String dob,
+//                                   @RequestParam("dateOfBirth") String dob,
                                    @RequestParam(value="dateOfWean", required = false) String dow) throws Exception {
         ModelAndView response = new ModelAndView();
 
@@ -159,6 +162,8 @@ public class CalfController {
         Animal bull = herdDAO.findById(Integer.parseInt(form.getFather()));
         Calf calf = new Calf();
         ParentCalf herdConnection = new ParentCalf();
+        UserCalf userCalf = new UserCalf();
+        User user = securityService.getLoggedInUser();
 
         if (bindingResult.hasErrors()) {
             List<String> errorMessages = new ArrayList<>();
@@ -168,7 +173,6 @@ public class CalfController {
             }
             log.info(errorMessages.toString());
 
-            User user = securityService.getLoggedInUser();
             List<UserAnimal> userAnimals = userAnimalDAO.findByUserId(user);
 
             //This is the list of cows for empty cow objects
@@ -186,7 +190,7 @@ public class CalfController {
         //Filling the calf object
         calf.setCalfId1(form.getCalfId1());
         calf.setCalfId2(form.getCalfId2());
-        calf.setDateOfBirth(LocalDate.parse(dob));
+        calf.setDateOfBirth(form.getDateOfBirth());
         calf.setBirthWeight(form.getBirthWeight());
         calf.setCalfSex(form.getCalfSex());
         calf.setBreed(form.getBreed());
@@ -204,6 +208,11 @@ public class CalfController {
         //Saving the connection to DB
         parentCalfDAO.save(herdConnection);
 
+        //Setting up the user calf connection
+        userCalf.setUserId(user);
+        userCalf.setCalfId(calf);
+        userCalfDAO.save(userCalf);
+
         response.setViewName("redirect:/herd/calfInfo");
         return response;
     }
@@ -214,12 +223,24 @@ public class CalfController {
 
         Calf calfBegone = calfDAO.findById(cID);
         ParentCalf parentCalfBegone = parentCalfDAO.findByCalfId(calfBegone.getId());
+        UserCalf userCalfBegone = userCalfDAO.findByCalfId(calfBegone.getCalfId1());
         parentCalfDAO.delete(parentCalfBegone);
         calfDAO.delete(calfBegone);
+        userCalfDAO.delete(userCalfBegone);
 
         response.setViewName("redirect:/index");
         return response;
     }
 
+//    @RequestMapping(value = "/herd/list", method = RequestMethod.GET)
+//    public ModelAndView listAllCalves() throws Exception {
+//        ModelAndView response = new ModelAndView();
+//
+//        User userLoggedIn = securityService.getLoggedInUser();
+//        List<UserCalf> userCalves = userCalfDAO.findByUserId(userLoggedIn);
+//        response.addObject("calf", userCalves);
+//
+//        return response;
+//    }
 
 }

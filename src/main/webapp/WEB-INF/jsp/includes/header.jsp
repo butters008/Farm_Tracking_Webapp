@@ -51,6 +51,9 @@
                 <sec:authorize access="!isAuthenticated()">
                     <li class="navButton account"><a href="../login/login">Login</a></li>
                 </sec:authorize>
+                <sec:authorize access="!isAuthenticated()">
+                    <li class="navButton account"><a href="../user/register">Sign Up</a></li>
+                </sec:authorize>
                 <sec:authorize access="isAuthenticated()">
                     <li class="navButton account"><a href="../login/logout">Logout</a></li>
                 </sec:authorize>

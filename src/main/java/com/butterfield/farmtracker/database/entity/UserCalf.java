@@ -1,7 +1,7 @@
 package com.butterfield.farmtracker.database.entity;
 
+
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -11,8 +11,8 @@ import javax.persistence.*;
 @Setter
 @ToString
 @Entity
-@Table(name = "user_animals")
-public class UserAnimal {
+@Table(name = "user_calves")
+public class UserCalf {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -23,15 +23,15 @@ public class UserAnimal {
     private User userId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "animal_id")
-    private Animal animalId;
+    @JoinColumn(name = "calf_id")
+    private Calf calfId;
 
-    public UserAnimal() {
-    }
-
-    public UserAnimal(User userId, Animal animalId) {
+    public UserCalf(User userId, Calf calfId){
         this.userId = userId;
-        this.animalId = animalId;
+        this.calfId = calfId;
     }
 
+    public UserCalf() {
+
+    }
 }

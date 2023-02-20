@@ -112,51 +112,68 @@
     background-color: var(--actionColor);
 }
 
+/* 
+==========================================================
+==== LIST PAGE ===========================================
+==========================================================
+*/
+
 #listTitle{
     grid-area: listTitle;
-    display: flex;
-    justify-content: center;
+    text-align: center;
+    /* display: flex;
+    justify-content: center; */
 }
 
-#listTable{
+#listContainer{
     grid-area: listTable;
-    display: flex;
-    justify-content: center;
+    width: 100%;
     background-color: #595959;
     color: var(--baseColor);
     border-radius: 15px;
 }
 
-#listTable table{
-    border-collapse: collapse;
-
+#listTable{
+  margin: auto;
 }
 
-#listTable table thead{
+#listTable thead{
+  
     background-color: var(--baseColor);
     height: 7vh;
     font-size: large;
+    /* display: flex;
+    justify-content: space-evenly;
+    align-items: center; */
     width: 100%;
     color: var(--whiteText);
-    border: solid 2px black;
-    border-radius: 25px;
+    border-bottom: solid 2px black;
+    /*border-radius: 25px;*/
 }
 
-#listTable table button{
+.listTableData{
+  padding-left: 15px;
+  padding-right: 15px;
+  text-align: center;
+  /* margin-bottom: 5px; */
+}
+
+.listTableRow{
+  width: 100%;
+  margin: auto;
+}
+
+
+#listTable button{
     min-height: 2.5vh;
     min-width: 8vh;
     border-radius: 15px;
     background-color: var(--attentionColor);
 }
 
-#listTable table button:hover{
+#listTable button:hover{
     background-color: var(--actionColor);
 }
-
-/*#listTable table thead tr{*/
-/*    border-radius: 15px;*/
-
-/*}*/
 
 #listTable a{
     text-decoration: none;
@@ -165,19 +182,11 @@
 #listFooter{
     grid-area: listFooter;
 }
-#listTable #herdList {
-    width: 40vw;
-}
 
-#listTable #herdList tr{
-    height: 2vh;
-    align-content: center;
-}
 
-#listTable #herdList td{
-    padding: 5px;
-    text-align: center;
-}
+
+
+
 
 .aSubmit #deleteBtn {
     width: 8vw;

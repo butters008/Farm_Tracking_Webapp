@@ -13,7 +13,7 @@ import java.util.Set;
 @ToString
 @Entity
 @Table(name = "calves")
-public class Calf {
+public class  Calf {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

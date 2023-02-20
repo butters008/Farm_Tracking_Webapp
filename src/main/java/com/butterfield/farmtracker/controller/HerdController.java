@@ -1,10 +1,7 @@
 package com.butterfield.farmtracker.controller;
 
 import com.butterfield.farmtracker.database.dao.*;
-import com.butterfield.farmtracker.database.entity.Animal;
-import com.butterfield.farmtracker.database.entity.ParentCalf;
-import com.butterfield.farmtracker.database.entity.User;
-import com.butterfield.farmtracker.database.entity.UserAnimal;
+import com.butterfield.farmtracker.database.entity.*;
 import com.butterfield.farmtracker.formBean.HerdFormBean;
 import com.butterfield.farmtracker.security.SecurityService;
 import com.butterfield.farmtracker.service.ErrorService;
@@ -47,6 +44,9 @@ public class HerdController {
     private ParentCalfDAO parentCalfDAO;
 
     @Autowired
+    private UserCalfDAO userCalfDAO;
+
+    @Autowired
     private SecurityService securityService = new SecurityService();
 
     @Autowired
@@ -54,15 +54,6 @@ public class HerdController {
 
     @Autowired
     private ErrorService errorService = new ErrorService();
-
-    /*
-     * TODO: Cow Revamp
-     *  5) Add picture for Animal
-     *  6) Refactor List
-     *    - Have it filter Cows, Bulls, and Calves
-     *    - Have it filter by Calf and DOB (year and/or month)
-     *  7) Put all methods that are not in controllers, into service class
-     * */
 
     //The initial get for addAnimal jsp page
     @RequestMapping(value = "/herd/addAnimal", method = RequestMethod.GET)
@@ -79,6 +70,10 @@ public class HerdController {
 
         User userLoggedIn = securityService.getLoggedInUser();
         List<UserAnimal> userAnimals = userAnimalDAO.findByUserId(userLoggedIn);
+        //Adding Calves in here for right now
+        List<UserCalf> userCalves = userCalfDAO.findByUserId(userLoggedIn);
+        response.addObject("calf", userCalves);
+
         response.addObject("herd", userAnimals);
 
         return response;

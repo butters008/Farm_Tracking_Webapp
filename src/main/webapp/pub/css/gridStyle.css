@@ -11,11 +11,11 @@
 
 .headerContent{
     grid-area: headerContent;
-    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-columns: 1fr 1.25fr 1fr;
     grid-template-rows: 1fr;
     grid-template-areas: "siteLogo headerSearch headerAccount";
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     border-bottom: 1px solid white;
     margin-bottom: 1vh;
@@ -28,7 +28,7 @@
     grid-template-rows: 1fr;
     grid-template-areas: "navContainer mainContent sideContent";
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .footerContent{
