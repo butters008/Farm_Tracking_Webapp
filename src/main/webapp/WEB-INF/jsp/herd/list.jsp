@@ -5,59 +5,39 @@
   <div id="listTitle">
     <h2>Herd List</h2>
   </div>
-  <div id="listTable">
-    <div>
+  <div id="listContainer">
+    <%-- <div> --%>
       <%-- <table id="herdList"> --%>
-      <table>
+      <table id="listTable">
         <thead>
-          <tr>
-            <td></td>
-            <td>Primary Id</td>
-            <td>Second Id</td>
-            <td>Sex</td>
-            <td>Status</td>
-                </tr>
-            </thead>
-            <tbody id="listPrintOut">
-            <c:forEach items="${herd}" var="herdList">
-              <tr>
-                <td>
-                  <a href="./herdinfo?cowId=${herdList.animalId.animalId1}"><button>Edit</button></a>&emsp;
-                </td>
-                <td>${herdList.animalId.animalId1}</td>
-                <td>${herdList.animalId.animalId2}</td>
-                <td>${herdList.animalId.animalType}</td>
-                <td>${herdList.animalId.herdStatus}</td>
-              </tr>
-            </c:forEach>
-            <c:forEach></c:forEach>
-          </tbody>
-        </table>
-    </div>
+          <tr class=listTableRow>
+            <td class="listTableData"></td>
+            <td class="listTableData">Primary Id</td>
+            <td class="listTableData">Second Id</td>
+            <td class="listTableData">Sex</td>
+            <td class="listTableData">Status</td>
+          </tr>
+        </thead>
+        <tbody id="listPrintOut">
+          <c:forEach items="${herd}" var="herdList">
+            <tr class=listTableRow>
+              <td class="listTableData">
+                <a href="./herdinfo?cowId=${herdList.animalId.animalId1}" id="tableButton"><button >Edit</button></a>&emsp;
+              </td>
+              <td class="listTableData">${herdList.animalId.animalId1}</td>
+              <td class="listTableData">${herdList.animalId.animalId2}</td>
+              <td class="listTableData">${herdList.animalId.animalType}</td>
+              <td class="listTableData">${herdList.animalId.herdStatus}</td>
+            </tr>
+          </c:forEach>
+        </tbody>
+      </table>
+    <%-- </div> --%>
     <div id="listFooter">
     </div>
 </div>
 </section>
 <div id="sideContent">
-    <table id="calfList">
-        <thead>
-        <tr>
-            <th id="calfStart"></th>
-            <th>Calf Id-1</th>
-            <th>Sex</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach items="${calf}" var="calfList">
-            <tr>
-                <td>
-                    <a href="./calfUpdate?calfId=${calfList.calfId.id}"><button>Edit</button></a>&emsp;
-                </td>
-                <td>${calfList.calfId.calfId1}</td>
-                <td>${calfList.calfId.calfSex}</td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
+
 </div>
 <jsp:include page="../includes/footer.jsp"/>
