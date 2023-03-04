@@ -223,24 +223,14 @@ public class CalfController {
 
         Calf calfBegone = calfDAO.findById(cID);
         ParentCalf parentCalfBegone = parentCalfDAO.findByCalfId(calfBegone.getId());
-        UserCalf userCalfBegone = userCalfDAO.findByCalfId(calfBegone.getCalfId1());
+        UserCalf userCalfBegone = userCalfDAO.findByCalfId(calfBegone);
+
         parentCalfDAO.delete(parentCalfBegone);
-        calfDAO.delete(calfBegone);
         userCalfDAO.delete(userCalfBegone);
+        calfDAO.delete(calfBegone);
 
         response.setViewName("redirect:/index");
         return response;
     }
-
-//    @RequestMapping(value = "/herd/list", method = RequestMethod.GET)
-//    public ModelAndView listAllCalves() throws Exception {
-//        ModelAndView response = new ModelAndView();
-//
-//        User userLoggedIn = securityService.getLoggedInUser();
-//        List<UserCalf> userCalves = userCalfDAO.findByUserId(userLoggedIn);
-//        response.addObject("calf", userCalves);
-//
-//        return response;
-//    }
 
 }
