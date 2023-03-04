@@ -34,7 +34,8 @@
 .footerContent{
     grid-area: footerContent;
     height: 10vh;
-    background-color: azure;
+    /*background-color: azure;*/
+    display: none;
 }
 /*-----------------------------*/
 /*header Grid Layout ----------*/

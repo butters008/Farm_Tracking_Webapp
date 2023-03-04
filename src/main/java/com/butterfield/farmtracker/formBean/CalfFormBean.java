@@ -26,7 +26,7 @@ public class CalfFormBean {
     @NotBlank(message="Calf Sex - Required")
     private String calfSex;
 
-    @NotNull(message = "Need to have a Birth Weight")
+//    @NotNull(message = "Need to have a Birth Weight")
     private Integer birthWeight;
 
     @NotNull(message = "Need to have a Date-of-Birth")
