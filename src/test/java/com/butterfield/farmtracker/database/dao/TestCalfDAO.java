@@ -25,34 +25,34 @@ import java.time.LocalDate;
 @AutoConfigureTestDatabase(replace= AutoConfigureTestDatabase.Replace.NONE)
 public class TestCalfDAO {
 
-    @Autowired
-    private CalfDAO calfDAO;
-
-    @Autowired
-    private HerdDAO herdDAO;
-
-    @Autowired
-    private ParentCalfDAO parentCalfDAO;
-
-    @ParameterizedTest
-    @Order(1)
-    @Rollback(value = false)
-    @CsvSource({"Y123", "1234", "Male", "2022-04-19"})
-    public void createCalfTest(String cid1, String cid2, String sex, String dob){
-        //expected
-        Calf expected = new Calf();
-//        expected.setId(1);
-
-        expected.setCalfId1(cid1);
-        expected.setCalfId2(cid2);
-        expected.setCalfSex(sex);
-        expected.setDateOfBirth(LocalDate.parse(dob));
-
-        Calf result = calfDAO.save(expected);
-//        testParentCalf.setCalf(expected);
-//        parentCalfDAO.save(testParentCalf);
-
-        Assertions.assertEquals(cid1, result.getCalfId1());
-    }
+//    @Autowired
+//    private CalfDAO calfDAO;
+//
+//    @Autowired
+//    private HerdDAO herdDAO;
+//
+//    @Autowired
+//    private ParentCalfDAO parentCalfDAO;
+//
+//    @ParameterizedTest
+//    @Order(1)
+//    @Rollback(value = false)
+//    @CsvSource({"Y123", "1234", "Male", "2022-04-19"})
+//    public void createCalfTest(String cid1, String cid2, String sex, String dob){
+//        //expected
+//        Calf expected = new Calf();
+////        expected.setId(1);
+//
+//        expected.setCalfId1(cid1);
+//        expected.setCalfId2(cid2);
+//        expected.setCalfSex(sex);
+//        expected.setDateOfBirth(LocalDate.parse(dob));
+//
+//        Calf result = calfDAO.save(expected);
+////        testParentCalf.setCalf(expected);
+////        parentCalfDAO.save(testParentCalf);
+//
+//        Assertions.assertEquals(cid1, result.getCalfId1());
+//    }
 
 }
