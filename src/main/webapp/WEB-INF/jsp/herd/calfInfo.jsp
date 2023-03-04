@@ -124,7 +124,7 @@
           </tr>
           <tr>
             <td>
-              <label for="birthWeight">Birth Weight</label>
+              <label for="birthWeight">Birth Weight*</label>
             </td>
             <td>
               <label for="father">Father</label>
@@ -171,7 +171,7 @@
 <br><br><br><br>
 
   <div class="calfImage">
-    <button onclick="working2()" type="button">JavaScript Function 2</button>
+<%--    <button onclick="working2()" type="button">JavaScript Function 2</button>--%>
   </div>
   <div class="calfExtraInfo">
     <table>

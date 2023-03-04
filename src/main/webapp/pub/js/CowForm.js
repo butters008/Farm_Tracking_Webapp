@@ -53,10 +53,10 @@ const lastCheck = () => {
     const breed = document.getElementById("breed").value;
 
     if (aId1.trim() === 0 || breed.trim() === 0) {
-        alert("No Information - Please fill out the form!")
+        // alert("No Information - Please fill out the form!")
         $button.prop('disabled', true);
     } else {
-        alert("In the else")
+        // alert("In the else")
         $button.prop('disabled', false);
     }
 
